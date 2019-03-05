@@ -10,12 +10,12 @@ public class CardLabel extends Label {
 	public CardLabel() {
 		super();
 		this.getStyleClass().add("card");
+		
 	}
 
 	public void setCard(Card card) {
 		if (card != null) {
 			String fileName = cardToFileName(card);
-			//System.out.println(fileName);
 			Image image = new Image(this.getClass().getClassLoader().getResourceAsStream("images/" + fileName));
 			ImageView imv = new ImageView(image);
 			imv.fitWidthProperty().bind(this.widthProperty());

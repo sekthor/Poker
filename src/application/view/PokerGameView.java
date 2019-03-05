@@ -35,6 +35,7 @@ public class PokerGameView {
 		BorderPane root = new BorderPane();
 		root.setCenter(players);
 		root.setBottom(controls);
+		root.setId("root");
 		
 		// Disallow resizing - which is difficult to get right with images
 		stage.setResizable(false);
