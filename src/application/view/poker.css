@@ -21,9 +21,9 @@
 .card {
   -fx-font-size: 18px;
 	-fx-padding: 2.0px;
-    -fx-border-color: black;
+    -fx-border-color: white;
     -fx-border-width: 1.0px;
-	-fx-background-color: lemonchiffon;
+	-fx-background-color: black;
     -fx-min-width: 50;
     -fx-pref-width: 111;
     -fx-max-width: 500;
