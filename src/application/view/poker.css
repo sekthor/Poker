@@ -8,6 +8,7 @@
 }
 
 #controlArea {
+	-fx-background-color: #5f1919;
     -fx-spacing: 15.0px;
     -fx-padding: 5.0px;
     -fx-border-color: black;
@@ -21,7 +22,7 @@
 	-fx-padding: 5.0px;
 	-fx-background-color: transparent;
     -fx-border-color: white;
-    -fx-border-width: 2.0px;
+    -fx-border-width: 1px;
     -fx-font-size: 18px;
     -fx-text-fill: white;
 }
@@ -42,7 +43,7 @@
 }
 
 #root{
-	-fx-background-image: url("../../images/background.jpg");
+	-fx-background-image: url("../../images/backgroundmono.jpg");
 	-fx-background-position: center;
 	-fx-text-fill: #800000;
 }
