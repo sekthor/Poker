@@ -1,10 +1,10 @@
 package application.model;
-/***
+
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 import org.junit.Before;
-import org.junit.Test;***/
+import org.junit.Test;
 
 public class HandTypeTest {
 	// We define the hands using abbreviations. The code at the bottom
@@ -13,7 +13,7 @@ public class HandTypeTest {
 	// Another method takes a set of five cards, and translates the whole hand
 	//
 	// Yet another method does this for a whole set of hands
-	/***private static String[][] highCards = {
+	private static String[][] highCards = {
 			{ "2S", "9C", "3H", "5D", "7H" },
 			{ "7S", "5C", "AH", "JD", "6H" },
 			{ "2S", "3S", "4S", "5S", "7S" },
@@ -132,5 +132,5 @@ public class HandTypeTest {
 		if (s == 'S') suit = Card.Suit.Spades;
 
 		return new Card(suit, rank);
-	}***/
+	}
 }
