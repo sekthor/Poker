@@ -25,6 +25,9 @@ public enum HandType {
     }
     
     public static boolean isOnePair(ArrayList<Card> cards) {
+    	// iteriert durch die arrayList bis zum Zweitletzten
+    	// zweiter loop vom zweiten bis zum letzten, vergleicht
+    	// Werte vom ersten und zwieten Loop
         boolean found = false;
         for (int i = 0; i < cards.size() - 1 && !found; i++) {
             for (int j = i+1; j < cards.size() && !found; j++) {
@@ -37,7 +40,9 @@ public enum HandType {
     public static boolean isTwoPair(ArrayList<Card> cards) {
         // Clone the cards, because we will be altering the list
         ArrayList<Card> clonedCards = (ArrayList<Card>) cards.clone();
-
+        
+        // Same as isOnePair() but if a pair is found, values will be 
+        // deleted, and isOnePair() is executed.
         // Find the first pair; if found, remove the cards from the list
         boolean firstPairFound = false;
         for (int i = 0; i < clonedCards.size() - 1 && !firstPairFound; i++) {
@@ -54,8 +59,19 @@ public enum HandType {
     }
     
     public static boolean isThreeOfAKind(ArrayList<Card> cards) {
-        // TODO        
-        return false;
+    	boolean found = false;
+        for (int i = 0; i < cards.size() - 2 && !found; i++) {
+            for (int j = i+1; j < cards.size() - 1  && !found; j++) {
+                if (cards.get(i).getRank() == cards.get(j).getRank()) {
+                	for (int k = j+1; k < cards.size() && !found; k++) {
+                		if(cards.get(j).getRank() == cards.get(k).getRank()) {
+                			found = true;
+                		}
+                	}
+                }
+            }
+        }
+        return found;        
     }
     
     public static boolean isStraight(ArrayList<Card> cards) {
