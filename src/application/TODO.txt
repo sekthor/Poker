@@ -7,3 +7,9 @@ TODO:
 - add animation text increase of winner when won
 - add deck to GUI
 - animation from deck to hand 
+
+
+
+log:
+- Changed all the cards to be white
+- Made a background image
