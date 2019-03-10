@@ -109,6 +109,8 @@ public enum HandType {
     }
     
     public static boolean isFlush(ArrayList<Card> cards) {
+    	/***
+    	 * checks if all the cards have the same suit***/
         Suit suit = cards.get(0).getSuit();
         boolean stillPossible = true;
         for (int i = 1; i < cards.size() && stillPossible; i++) {
