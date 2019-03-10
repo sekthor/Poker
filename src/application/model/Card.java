@@ -1,6 +1,6 @@
 package application.model;
 
-public class Card {
+public class Card implements Comparable<Card>{
     public enum Suit { Clubs, Diamonds, Hearts, Spades;
         @Override
         public String toString() {
@@ -37,7 +37,7 @@ public class Card {
     private final Suit suit;
     private final Rank rank;
     
-    public Card(Suit suit, Rank rank) {
+    public Card(Suit suit, Rank rank){
         this.suit = suit;
         this.rank = rank;
     }
@@ -54,4 +54,12 @@ public class Card {
     public String toString() {
         return rank.toString() + suit.toString();
     }
+    
+  
+
+	@Override
+	public int compareTo(Card otherCard) {
+		return this.rank.ordinal() - otherCard.rank.ordinal();
+		
+	}
 }
