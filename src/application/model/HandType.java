@@ -31,11 +31,11 @@ public enum HandType {
         if (isOnePair(cards)) currentEval = OnePair;
         if (isTwoPair(cards)) currentEval = TwoPair;
         if (isThreeOfAKind(cards)) currentEval = ThreeOfAKind;
-        if (isStraight(cards)) currentEval = Straight; straight = true;
-        if (isFlush(cards)) currentEval = Flush; flush = true;
+        if (isStraight(cards)) {currentEval = Straight; straight = true;}
+        if (isFlush(cards)) {currentEval = Flush; flush = true;}
         if (isFullHouse(cards)) currentEval = FullHouse; 
         if (isFourOfAKind(cards)) currentEval = FourOfAKind;
-        if (isStraightFlush(straight, flush)) currentEval = StraightFlush; straightFlush = true;
+        if (isStraightFlush(straight, flush)) {currentEval = StraightFlush; straightFlush = true;}
         if (isRoyalFlush(cards, straightFlush)) currentEval = RoyalFlush;
         
 
