@@ -110,7 +110,8 @@ public enum HandType {
     
     public static boolean isFlush(ArrayList<Card> cards) {
     	/***
-    	 * checks if all the cards have the same suit***/
+    	 * checks if all the cards have the same suit
+    	 * ***/
         Suit suit = cards.get(0).getSuit();
         boolean stillPossible = true;
         for (int i = 1; i < cards.size() && stillPossible; i++) {
@@ -122,8 +123,37 @@ public enum HandType {
     }
     
     public static boolean isFullHouse(ArrayList<Card> cards) {
-        // TODO        
-        return false;
+    	/***
+    	 * List will be altered, so we clone it
+    	 * same algorithm as isThreeOfAKind, but the three card will be removed
+    	 * 
+    	 * ***/
+    	ArrayList<Card> clonedCards = (ArrayList<Card>) cards.clone();
+    	boolean found = false;
+        for (int i = 0; i < clonedCards.size() - 2 && !found; i++) {
+            for (int j = i+1; j < clonedCards.size() - 1  && !found; j++) {
+                if (clonedCards.get(i).getRank() == clonedCards.get(j).getRank()) {
+                	for (int k = j+1; k < clonedCards.size() && !found; k++) {
+                		if(clonedCards.get(j).getRank() == clonedCards.get(k).getRank()) {
+                			found = true;
+                			clonedCards.remove(k);
+                			clonedCards.remove(j);
+                			clonedCards.remove(i);
+                		}
+                	}
+                }
+            }
+        }
+        
+        if (found) {
+        	if (clonedCards.get(0).getRank() == clonedCards.get(1).getRank()) {
+        		found = true;
+        	} else {
+        		found = false;
+        	}
+        } 
+        
+        return found;
     }
     
     public static boolean isFourOfAKind(ArrayList<Card> cards) {
