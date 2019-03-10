@@ -59,7 +59,16 @@ public enum HandType {
         return firstPairFound && isOnePair(clonedCards);
     }
     
+    
     public static boolean isThreeOfAKind(ArrayList<Card> cards) {
+    	/***
+         * first for loop goes from first car to third last
+         * second from second card to second last
+         * third from third card to last 
+         * if cards from first and second loop match, they will be compared
+         * to the card from third loop
+         * if they match as well, we've got a Three of a Kind Hand
+         * ***/
     	boolean found = false;
         for (int i = 0; i < cards.size() - 2 && !found; i++) {
             for (int j = i+1; j < cards.size() - 1  && !found; j++) {
@@ -75,7 +84,16 @@ public enum HandType {
         return found;        
     }
     
+    
+    
     public static boolean isStraight(ArrayList<Card> cards) {
+    	/***
+         * At fist we clone and then sort the cards using the sort() method
+         * we can now assume in order to check a straight hand each card 
+         * must have a rank exactly 1 ordinal higher than the previous one.
+         * so compareTo() has to return a -1 every time. Otherwise we return 
+         * false immediately.
+         * ***/
         ArrayList<Card> clonedCards = (ArrayList<Card>) cards.clone();
         
         Collections.sort(clonedCards);
