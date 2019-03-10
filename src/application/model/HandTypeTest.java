@@ -2,6 +2,7 @@ package application.model;
 
 import static org.junit.Assert.*;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -308,6 +309,8 @@ public class HandTypeTest {
 		for (String in : inStrings) {
 			hand.add(makeCard(in));
 		}
+		// Added this line since in HandType we are now always dealing with sorted ArrayLists
+		Collections.sort(hand);
 		return hand;
 	}
 	
