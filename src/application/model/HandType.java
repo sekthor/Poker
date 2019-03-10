@@ -3,6 +3,8 @@ package application.model;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import application.model.Card.Suit;
+
 public enum HandType {
     HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind, StraightFlush;
     
@@ -28,7 +30,7 @@ public enum HandType {
     public static boolean isOnePair(ArrayList<Card> cards) {
     	// iteriert durch die arrayList bis zum Zweitletzten
     	// zweiter loop vom zweiten bis zum letzten, vergleicht
-    	// Werte vom ersten und zwieten Loop
+    	// Werte vom ersten und zweiten Loop
         boolean found = false;
         for (int i = 0; i < cards.size() - 1 && !found; i++) {
             for (int j = i+1; j < cards.size() && !found; j++) {
@@ -97,18 +99,24 @@ public enum HandType {
         ArrayList<Card> clonedCards = (ArrayList<Card>) cards.clone();
         
         Collections.sort(clonedCards);
-        
-        for(int i = 0; i < clonedCards.size() - 1; i++) {
+        boolean stillPossible = true;
+        for(int i = 0; i < clonedCards.size() - 1 && stillPossible; i++) {
         	if (clonedCards.get(i).compareTo(clonedCards.get(i+1)) != -1) {
-        		return false;
+        		stillPossible = false;
         	} 
         } 
-        return true;    
+        return stillPossible;    
     }
     
     public static boolean isFlush(ArrayList<Card> cards) {
-        // TODO        
-        return false;
+        Suit suit = cards.get(0).getSuit();
+        boolean stillPossible = true;
+        for (int i = 1; i < cards.size() && stillPossible; i++) {
+        	if (cards.get(i).getSuit() != suit) {
+        		stillPossible = false;
+        	}
+        }
+        return stillPossible;
     }
     
     public static boolean isFullHouse(ArrayList<Card> cards) {
