@@ -38,7 +38,7 @@ public class PokerGameView {
 		root.setId("root");
 		
 		// Disallow resizing - which is difficult to get right with images
-		stage.setResizable(false);
+		stage.setResizable(true);
 
         // Create the scene using our layout; then display it
         Scene scene = new Scene(root,1180,600);
