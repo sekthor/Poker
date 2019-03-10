@@ -62,6 +62,13 @@ public class HandTypeTest {
 			{ "9S", "2C", "2H", "9D", "2H" }
 			};
 	
+	private static String[][] fourOfAKind = {
+			{ "2S", "2C", "2H", "5D", "2H" },
+			{ "AS", "AC", "3H", "AD", "AH" },
+			{ "3S", "2C", "3H", "3D", "3H" },
+			{ "9S", "2C", "2H", "2D", "2H" }
+			};
+	
 	private static String[][] straightFlush = {
 			{ "2S", "3S", "4S", "5S", "6S" },
 			{ "8C", "6C", "9C", "TC", "7C" },
@@ -85,6 +92,7 @@ public class HandTypeTest {
 	ArrayList<ArrayList<Card>> straightHands;
 	ArrayList<ArrayList<Card>> flushHands;
 	ArrayList<ArrayList<Card>> fullHouseHands;
+	ArrayList<ArrayList<Card>> fourOfAKindHands;
 	ArrayList<ArrayList<Card>> straightFlushHands;
 	ArrayList<ArrayList<Card>> royalFlushHands;
 	
@@ -102,6 +110,7 @@ public class HandTypeTest {
 		straightHands = makeHands(straight);
 		flushHands = makeHands(flush);
 		fullHouseHands = makeHands(fullHouse);
+		fourOfAKindHands = makeHands(fourOfAKind);
 		straightFlushHands = makeHands(straightFlush);
 		royalFlushHands = makeHands(royalFlush);
 	}
@@ -220,6 +229,34 @@ public class HandTypeTest {
 		}
 		for (ArrayList<Card> hand : fullHouseHands) {
 			assertTrue(HandType.isFullHouse(hand));
+		}
+	}
+	
+	@Test
+	public void testIsFourOfAKind() {
+		for (ArrayList<Card> hand : highCardHands) {
+			assertFalse(HandType.isFourOfAKind(hand));
+		}
+		for (ArrayList<Card> hand : pairHands) {
+			assertFalse(HandType.isFourOfAKind(hand));
+		}
+		for (ArrayList<Card> hand : twoPairHands) {
+			assertFalse(HandType.isFourOfAKind(hand));
+		}
+		for (ArrayList<Card> hand : threeOfAKindHands) {
+			assertFalse(HandType.isFourOfAKind(hand));
+		}
+		for (ArrayList<Card> hand : straightHands) {
+			assertFalse(HandType.isFourOfAKind(hand));
+		}
+		for (ArrayList<Card> hand : flushHands) {
+			assertFalse(HandType.isFourOfAKind(hand));
+		}
+		for (ArrayList<Card> hand : fullHouseHands) {
+			assertFalse(HandType.isFourOfAKind(hand));
+		}
+		for (ArrayList<Card> hand : fourOfAKindHands) {
+			assertTrue(HandType.isFourOfAKind(hand));
 		}
 	}
 	
