@@ -1,6 +1,7 @@
 package application.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public enum HandType {
     HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind, StraightFlush;
@@ -75,8 +76,16 @@ public enum HandType {
     }
     
     public static boolean isStraight(ArrayList<Card> cards) {
-        // TODO        
-        return false;
+        ArrayList<Card> clonedCards = (ArrayList<Card>) cards.clone();
+        
+        Collections.sort(clonedCards);
+        
+        for(int i = 0; i < clonedCards.size() - 1; i++) {
+        	if (clonedCards.get(i).compareTo(clonedCards.get(i+1)) != -1) {
+        		return false;
+        	} 
+        } 
+        return true;    
     }
     
     public static boolean isFlush(ArrayList<Card> cards) {
