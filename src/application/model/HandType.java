@@ -38,7 +38,6 @@ public enum HandType {
         if (isStraightFlush(straight, flush)) {currentEval = StraightFlush; straightFlush = true;}
         if (isRoyalFlush(cards, straightFlush)) currentEval = RoyalFlush;
         
-
         
         return currentEval;
     }
@@ -60,9 +59,10 @@ public enum HandType {
         // Clone the cards, because we will be altering the list
         ArrayList<Card> clonedCards = (ArrayList<Card>) cards.clone();
         
-        // Same as isOnePair() but if a pair is found, values will be 
-        // deleted, and isOnePair() is executed.
-        // Find the first pair; if found, remove the cards from the list
+        /*** Same as isOnePair() but if a pair is found, values will be 
+         * deleted, and isOnePair() is executed.
+         * Find the first pair; if found, remove the cards from the list
+         * ***/
         boolean firstPairFound = false;
         for (int i = 0; i < clonedCards.size() - 1 && !firstPairFound; i++) {
             for (int j = i+1; j < clonedCards.size() && !firstPairFound; j++) {
@@ -101,6 +101,7 @@ public enum HandType {
         }
         return found;        
     }
+    
     
     
     
@@ -171,8 +172,20 @@ public enum HandType {
     }
     
     public static boolean isFourOfAKind(ArrayList<Card> cards) {
-        // TODO        
-        return false;
+    	boolean found = false;
+    	ArrayList<Card> clonedCards = (ArrayList<Card>) cards.clone();
+    	Collections.sort(clonedCards);
+    	/***
+    	 * Since we are dealing with a sorted ArrayList, we only have to 
+    	 * check whether the fist and the second last, or the second and 
+    	 * the last card have the same rank.
+    	 */
+    	if(clonedCards.get(0).getRank() == clonedCards.get(3).getRank() ||
+    	   clonedCards.get(1).getRank() == clonedCards.get(4).getRank()) {
+    		found = true;
+    	}
+        return found;      
+        
     }
     
     public static boolean isStraightFlush(boolean straight, boolean flush) {
