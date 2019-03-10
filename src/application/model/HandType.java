@@ -3,26 +3,42 @@ package application.model;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import application.model.Card.Rank;
 import application.model.Card.Suit;
 
 public enum HandType {
-    HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind, StraightFlush;
+    HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind, StraightFlush, RoyalFlush;
     
+	
+	
     /**
      * Determine the value of this hand. Note that this does not
      * account for any tie-breaking
-     */
+     */	
     public static HandType evaluateHand(ArrayList<Card> cards) {
         HandType currentEval = HighCard;
         
+        /***
+    	 * These variable are used to remember whether either of these cases
+    	 * have been proven true. So we don't have to check for it again when 
+    	 * evaluating a straightFlush or a RoyalFlush
+    	 * ***/
+        boolean straight = false;
+    	boolean flush = false;
+    	boolean straightFlush = false;
+    	
+    	
         if (isOnePair(cards)) currentEval = OnePair;
         if (isTwoPair(cards)) currentEval = TwoPair;
         if (isThreeOfAKind(cards)) currentEval = ThreeOfAKind;
-        if (isStraight(cards)) currentEval = Straight;
-        if (isFlush(cards)) currentEval = Flush;
-        if (isFullHouse(cards)) currentEval = FullHouse;
+        if (isStraight(cards)) currentEval = Straight; straight = true;
+        if (isFlush(cards)) currentEval = Flush; flush = true;
+        if (isFullHouse(cards)) currentEval = FullHouse; 
         if (isFourOfAKind(cards)) currentEval = FourOfAKind;
-        if (isStraightFlush(cards)) currentEval = StraightFlush;
+        if (isStraightFlush(straight, flush)) currentEval = StraightFlush; straightFlush = true;
+        if (isRoyalFlush(cards, straightFlush)) currentEval = RoyalFlush;
+        
+
         
         return currentEval;
     }
@@ -126,7 +142,7 @@ public enum HandType {
     	/***
     	 * List will be altered, so we clone it
     	 * same algorithm as isThreeOfAKind, but the three card will be removed
-    	 * 
+    	 * if the remaining two card have the same Rank, we've got us a Full House
     	 * ***/
     	ArrayList<Card> clonedCards = (ArrayList<Card>) cards.clone();
     	boolean found = false;
@@ -144,15 +160,13 @@ public enum HandType {
                 }
             }
         }
-        
         if (found) {
         	if (clonedCards.get(0).getRank() == clonedCards.get(1).getRank()) {
         		found = true;
         	} else {
         		found = false;
         	}
-        } 
-        
+        }
         return found;
     }
     
@@ -161,8 +175,32 @@ public enum HandType {
         return false;
     }
     
-    public static boolean isStraightFlush(ArrayList<Card> cards) {
-        // TODO        
-        return false;
+    public static boolean isStraightFlush(boolean straight, boolean flush) {
+    	/***
+    	 * if a Hand has been proven to be both a straight
+    	 * and a flush, don't bother checking again, just 
+    	 * return true
+    	 * ***/
+        if(straight && flush) {
+        	return true;
+        } else {
+        	return false;
+        }   
+    }
+    
+    public static boolean isRoyalFlush(ArrayList<Card> cards, boolean straightFlush) {
+    	/***
+    	 * If the hand is a straightFlush we only need to check whether or
+    	 * not there's an ace in it. Since it is a straight, the Ace being 
+    	 * the highest Card would automatically make it a RoyalFlush.
+    	 * ***/
+    	if(straightFlush) {
+    		ArrayList<Card> clonedCards = (ArrayList<Card>) cards.clone();
+    		Collections.sort(clonedCards);
+    		if(clonedCards.get(4).getRank() == Rank.Ace) {
+    			return true;
+    		} 
+    	}
+    	return false;
     }
 }
