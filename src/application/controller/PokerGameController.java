@@ -7,6 +7,7 @@ import application.model.Player;
 import application.model.PokerGameModel;
 import application.view.PlayerPane;
 import application.view.PokerGameView;
+import javafx.event.Event;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
@@ -14,13 +15,16 @@ import javafx.scene.control.Alert.AlertType;
 public class PokerGameController {
 	private PokerGameModel model;
 	private PokerGameView view;
+	private PokerGame pokerGame;
 	
-	public PokerGameController(PokerGameModel model, PokerGameView view) {
+	public PokerGameController(PokerGameModel model, PokerGameView view, PokerGame pokerGame) {
 		this.model = model;
 		this.view = view;
+		this.pokerGame = pokerGame;
 		
 		view.getShuffleButton().setOnAction( e -> shuffle() );
 		view.getDealButton().setOnAction( e -> deal() );
+		view.getAddButton().setOnAction(this::addPlayer);
 	}
 	
 
@@ -61,5 +65,11 @@ public class PokerGameController {
             Alert alert = new Alert(AlertType.ERROR, "Not enough cards - shuffle first");
             alert.showAndWait();
     	}
+    }
+    
+    private void addPlayer(Event e) {
+    	pokerGame.addPlayer();
+    	model.addPlayer();
+    	view.addPlayer();
     }
 }

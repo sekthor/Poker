@@ -2,6 +2,9 @@ package application.view;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -12,7 +15,11 @@ import application.model.PokerGameModel;
 
 public class PokerGameView {
 	private HBox players;
+	private HBox deck;
+	private HBox numOfPlayers;
+	private VBox playArea;
 	private ControlArea controls;
+	
 	
 	private PokerGameModel model;
 	
@@ -31,9 +38,15 @@ public class PokerGameView {
 		controls = new ControlArea();
 		controls.linkDeck(model.getDeck()); // link DeckLabel to DeckOfCards in the logic
 		
+		
+		// Section to choose amount of Players
+		
+		
+		
 		// Put players and controls into a BorderPane
 		BorderPane root = new BorderPane();
-		root.setCenter(players);
+		root.setTop(players);
+		//root.setCenter(deck);
 		root.setBottom(controls);
 		root.setId("root");
 		
@@ -41,7 +54,7 @@ public class PokerGameView {
 		stage.setResizable(true);
 
         // Create the scene using our layout; then display it
-        Scene scene = new Scene(root,1180,600);
+        Scene scene = new Scene(root);
         scene.getStylesheets().add(
                 getClass().getResource("poker.css").toExternalForm());
         stage.setTitle("Poker Miniproject");
@@ -59,5 +72,17 @@ public class PokerGameView {
 	
 	public Button getDealButton() {
 		return controls.btnDeal;
+	}
+	public Button getAddButton() {
+		return this.controls.btnAdd;
+	}
+	public Button getRemoveButton() {
+		return this.controls.btnRemove;
+	}
+	
+	public void addPlayer() {
+		PlayerPane pp = new PlayerPane();
+		pp.setPlayer(model.getPlayer(PokerGame.NUM_PLAYERS-1)); // link to player object in the logic
+		players.getChildren().add(pp);
 	}
 }
