@@ -52,5 +52,7 @@ public class PlayerPane extends VBox {
     		else
     			lblEvaluation.setText("--");
     	}
+    	winner.setText(Integer.toString(player.wins));
     }
+   
 }

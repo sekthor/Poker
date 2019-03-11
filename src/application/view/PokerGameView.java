@@ -36,11 +36,7 @@ public class PokerGameView {
 		
 		// Create the control area
 		controls = new ControlArea();
-		controls.linkDeck(model.getDeck()); // link DeckLabel to DeckOfCards in the logic
-		
-		
-		// Section to choose amount of Players
-		
+		controls.linkDeck(model.getDeck()); // link DeckLabel to DeckOfCards in the logic		
 		
 		
 		// Put players and controls into a BorderPane

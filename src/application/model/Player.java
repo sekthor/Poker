@@ -8,6 +8,7 @@ public class Player implements Comparable<Player> {
     private final String playerName; // This is the ID
     private final ArrayList<Card> cards = new ArrayList<>();
     private HandType handType;
+    public Integer wins = 0;
     
     public Player(String playerName) {
         this.playerName = playerName;
@@ -33,6 +34,10 @@ public class Player implements Comparable<Player> {
     public int getNumCards() {
         return cards.size();
     }
+    
+    public int getHandOrdinal() {
+    	return this.handType.ordinal();
+    }
 
     /**
      * If the hand has not been evaluated, but does have all cards, 
@@ -43,6 +48,19 @@ public class Player implements Comparable<Player> {
             handType = HandType.evaluateHand(cards);
         }
         return handType;
+    }
+    
+    public HandType getHandType() {
+    	return this.handType;
+    }
+    
+    /***
+    public int getWins() {
+    	return this.wins;
+    }*/
+    
+    public void addWin() {
+    	this.wins += 1;
     }
 
     /**

@@ -1,8 +1,12 @@
 package application.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import application.PokerGame;
 import application.model.Card;
 import application.model.DeckOfCards;
+import application.model.HandType;
 import application.model.Player;
 import application.model.PokerGameModel;
 import application.view.PlayerPane;
@@ -25,6 +29,8 @@ public class PokerGameController {
 		view.getShuffleButton().setOnAction( e -> shuffle() );
 		view.getDealButton().setOnAction( e -> deal() );
 		view.getAddButton().setOnAction(this::addPlayer);
+		
+		
 	}
 	
 
@@ -65,8 +71,30 @@ public class PokerGameController {
             Alert alert = new Alert(AlertType.ERROR, "Not enough cards - shuffle first");
             alert.showAndWait();
     	}
+    	evaluateWinner();
+    	
     }
     
+    private void evaluateWinner() {
+    	ArrayList<Player> players = new ArrayList<Player>();
+    	for (int i = 0; i < PokerGame.NUM_PLAYERS; i++) {
+    		players.add(model.getPlayer(i));
+    	}
+    	
+    	Player p = players.get(0);
+    	for(int i = 1; i<players.size(); i++) {
+    		Player p2 = players.get(i);
+    		if (p2.getHandOrdinal() > p.getHandOrdinal()) {
+    			p = p2;
+    		}
+    	}
+    	p.addWin();
+    	for (int i = 0; i< players.size(); i++) {
+    		PlayerPane pp = view.getPlayerPane(i);
+    		pp.updatePlayerDisplay();
+    	}
+    	
+    }
     private void addPlayer(Event e) {
     	pokerGame.addPlayer();
     	model.addPlayer();
