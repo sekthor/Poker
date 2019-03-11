@@ -31,21 +31,22 @@ public enum HandType {
     	/***
     	 * EXTREMELY IMPORTANT!!!
     	 * Certain methods require a sorted ArrayList. To cut down
-    	 * the amount of lines of code we sort right at the beginning
-    	 * this might be the most crucial line of this Class! 
+    	 * the amount of lines of code we sort right at the beginning.
+    	 * This might be the most crucial line of this file! 
     	 */
-    	Collections.sort(cards);
+    	ArrayList<Card> clonedCards = (ArrayList<Card>) cards.clone();
+    	Collections.sort(clonedCards);
     	
     	
-        if (isOnePair(cards)) currentEval = OnePair;
-        if (isTwoPair(cards)) currentEval = TwoPair;
-        if (isThreeOfAKind(cards)) currentEval = ThreeOfAKind;
-        if (isStraight(cards)) {currentEval = Straight; straight = true;}
-        if (isFlush(cards)) {currentEval = Flush; flush = true;}
-        if (isFullHouse(cards)) currentEval = FullHouse; 
-        if (isFourOfAKind(cards)) currentEval = FourOfAKind;
+        if (isOnePair(clonedCards)) currentEval = OnePair;
+        if (isTwoPair(clonedCards)) currentEval = TwoPair;
+        if (isThreeOfAKind(clonedCards)) currentEval = ThreeOfAKind;
+        if (isStraight(clonedCards)) {currentEval = Straight; straight = true;}
+        if (isFlush(clonedCards)) {currentEval = Flush; flush = true;}
+        if (isFullHouse(clonedCards)) currentEval = FullHouse; 
+        if (isFourOfAKind(clonedCards)) currentEval = FourOfAKind;
         if (isStraightFlush(straight, flush)) {currentEval = StraightFlush; straightFlush = true;}
-        if (isRoyalFlush(cards, straightFlush)) currentEval = RoyalFlush;
+        if (isRoyalFlush(clonedCards, straightFlush)) currentEval = RoyalFlush;
         
         
         return currentEval;
@@ -88,7 +89,7 @@ public enum HandType {
     
     public static boolean isThreeOfAKind(ArrayList<Card> cards) {
     	/***
-         * first for loop goes from first car to third last
+         * first for loop goes from first card to third last
          * second from second card to second last
          * third from third card to last 
          * if cards from first and second loop match, they will be compared
@@ -211,9 +212,8 @@ public enum HandType {
     
     public static boolean isStraightFlush(boolean straight, boolean flush) {
     	/***
-    	 * if a Hand has been proven to be both a straight
-    	 * and a flush, don't bother checking again, just 
-    	 * return true
+    	 * if a hand has been proven to be both a straight and a flush,
+    	 * we don't bother checking again and just return true
     	 * ***/
         if(straight && flush) {
         	return true;
@@ -224,9 +224,11 @@ public enum HandType {
     
     public static boolean isRoyalFlush(ArrayList<Card> cards, boolean straightFlush) {
     	/***
-    	 * If the hand is a straightFlush we only need to check whether or
+    	 * If the hand is a straight-flush we only need to check whether or
     	 * not there's an ace in it. Since it is a straight, the Ace being 
     	 * the highest Card would automatically make it a RoyalFlush.
+    	 * Since the ArrayList is sorted, if there's an ace it will be at 
+    	 * position 4.
     	 * ***/
     	if(straightFlush) {
     		if(cards.get(4).getRank() == Rank.Ace) {
