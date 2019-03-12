@@ -75,6 +75,8 @@ public class PokerGameController {
     	
     }
     
+    
+    
     private void evaluateWinner() {
     	ArrayList<Player> players = new ArrayList<Player>();
     	for (int i = 0; i < PokerGame.NUM_PLAYERS; i++) {
@@ -84,7 +86,11 @@ public class PokerGameController {
     	Player p = players.get(0);
     	for(int i = 1; i<players.size(); i++) {
     		Player p2 = players.get(i);
-    		if (p2.getHandOrdinal() > p.getHandOrdinal()) {
+    		if (p2.getHandOrdinal() == p.getHandOrdinal()) {
+    			if(tiebreak(p.getCards(), p2.getCards())) {
+    				p = p2;
+    			}
+    		} else if (p2.getHandOrdinal() > p.getHandOrdinal()) {
     			p = p2;
     		}
     	}
@@ -95,7 +101,19 @@ public class PokerGameController {
     	}
     	
     }
+    
+    
+    
+    private boolean tiebreak(ArrayList<Card> hand1, ArrayList<Card> hand2) {
+    	// If hand 2 wins, return true
+    	return false;
+    }
+    
     private void addPlayer(Event e) {
+    	/***
+    	 * this method is called when add playerButton is pressed
+    	 * It executes the respective methods in View, Model, and PokerGame
+    	 */
     	pokerGame.addPlayer();
     	model.addPlayer();
     	view.addPlayer();

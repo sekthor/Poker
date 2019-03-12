@@ -1,6 +1,6 @@
 TODO:
 
-- add all Hand-evaluation methods
+- add all Hand-evaluation methods [check]
 - check winner
 - add win counter to Player
 - add win counter to GUI

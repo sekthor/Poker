@@ -34,10 +34,12 @@ public class PlayerPane extends VBox {
         }
     }
     
+    
     public void setPlayer(Player player) {
     	this.player = player;
     	updatePlayerDisplay(); // Immediately display the player information
     }
+    
     
     public void updatePlayerDisplay() {
     	lblName.setText(player.getPlayerName());
@@ -52,7 +54,7 @@ public class PlayerPane extends VBox {
     		else
     			lblEvaluation.setText("--");
     	}
-    	winner.setText(Integer.toString(player.wins));
+    	winner.setText("Wins: " + Integer.toString(player.wins));
     }
    
 }

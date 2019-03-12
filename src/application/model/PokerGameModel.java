@@ -27,6 +27,9 @@ public class PokerGameModel {
 	}
 	
 	public void addPlayer() {
+		/***
+		 * This method adds a new Player to the ArrayList of players
+		 * */
 		players.add(new Player("Player " + (PokerGame.NUM_PLAYERS-1)));
 	}
 }

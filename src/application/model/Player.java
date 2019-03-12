@@ -54,11 +54,6 @@ public class Player implements Comparable<Player> {
     	return this.handType;
     }
     
-    /***
-    public int getWins() {
-    	return this.wins;
-    }*/
-    
     public void addWin() {
     	this.wins += 1;
     }
