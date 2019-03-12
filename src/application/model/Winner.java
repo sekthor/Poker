@@ -44,7 +44,13 @@ public class Winner {
 		
 		
 			case HighCard:
-				if(hand1.get(4).compareTo(hand2.get(4))>0) {
+				if(hand1.get(4).compareTo(hand2.get(4)) == 0) {
+					if(hand1.get(4).getSuit().ordinal() > hand2.get(4).getSuit().ordinal()) {
+						return p1;
+					} else {
+						return p2;
+					}
+				} else if(hand1.get(4).compareTo(hand2.get(4)) > 0) {
 					return p1;
 				} else {
 					return p2;
@@ -68,7 +74,10 @@ public class Winner {
 						found = true;
 					}
 				}
-				if (pair1Rank.ordinal() > pair2Rank.ordinal()) {
+				if (pair1Rank.ordinal() == pair2Rank.ordinal()) {
+					/* TODO: need to figure out how to check for suit*/ 
+					return p1;
+				} else if (pair1Rank.ordinal() > pair2Rank.ordinal()){
 					return p1;
 				} else {
 					return p2;
@@ -85,7 +94,14 @@ public class Winner {
 				 * be part of the ThreeOfAKind. so we only need to compare the ranks of 
 				 * the two cards on position 2.
 				 */
-				if(hand1.get(2).getRank().ordinal() > hand2.get(2).getRank().ordinal()) {
+				if(hand1.get(2).getRank().ordinal() == hand2.get(2).getRank().ordinal()) {
+					// if they match we need to compare ordinal of Suits
+					if(hand1.get(2).getSuit().ordinal() > hand2.get(2).getSuit().ordinal()) {
+						return p1;
+					} else {
+						return p2;
+					}		
+				} else if(hand1.get(2).getRank().ordinal() > hand2.get(2).getRank().ordinal()){
 					return p1;
 				} else {
 					return p2;
@@ -97,7 +113,13 @@ public class Winner {
 				 * Since the ArrayList is sorted, we only need to check which hand has the highest 
 				 * card at the end.
 				 */
-				if (hand1.get(4).getRank().ordinal() > hand2.get(4).getRank().ordinal()) {
+				if (hand1.get(4).getRank().ordinal() == hand2.get(4).getRank().ordinal()) {
+					if (hand1.get(4).getSuit().ordinal() > hand2.get(4).getSuit().ordinal()) {
+						return p1;
+					} else {
+						return p2;
+					}
+				} else if (hand1.get(4).getRank().ordinal() > hand2.get(4).getRank().ordinal()){
 					return p1;
 				} else {
 					return p2;
