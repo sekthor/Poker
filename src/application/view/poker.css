@@ -55,22 +55,36 @@
 }
 
 .button{
-	-fx-background-color: black;
+	-fx-background-color: transparent;
 	-fx-text-fill: white;
 	-fx-padding: 10px;
 }
 
+.button:hover{
+	-fx-background-color: #990000;
+}
+
 .menu-bar{
 	-fx-color: black;
-	-fx-background-color: #800000;
+	-fx-background-color: #5f1919;
 	-fx-border-color: white;
+	-fx-font-size: 18px;
 	}
 	
 .menu-item{
-	-fx-background-color: #800000;
+	-fx-background-color: #5f1919;
 	-fx-border-color: white;
 }
+
+.menu-item:hover{
+	-fx-background-color: #990000;
+}
+
 .menu{
 	-fx-width: 50px;
+}
+
+.menu:hover{
+	-fx-background-color: #990000;
 }
 
