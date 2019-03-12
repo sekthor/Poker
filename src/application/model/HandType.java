@@ -52,8 +52,14 @@ public enum HandType {
         return currentEval;
     }
     
-    
-    public static boolean isOnePair(ArrayList<Card> cards) {
+    /***
+     * All of the following methods have been made protected, since the only
+     * times they are called is through the evaluateHand() method or in the 
+     * JUnit Test.
+     * Now evaluateHand is the only Interface to everything outside of this 
+     * package.
+     */
+    protected static boolean isOnePair(ArrayList<Card> cards) {
         boolean found = false;
         for (int i = 0; i < cards.size() - 1 && !found; i++) {
             for (int j = i+1; j < cards.size() && !found; j++) {
@@ -64,7 +70,7 @@ public enum HandType {
     }
     
     
-    public static boolean isTwoPair(ArrayList<Card> cards) {
+    protected static boolean isTwoPair(ArrayList<Card> cards) {
         // Clone the cards, because we will be altering the list
         ArrayList<Card> clonedCards = (ArrayList<Card>) cards.clone();
         
@@ -87,7 +93,7 @@ public enum HandType {
     }
     
     
-    public static boolean isThreeOfAKind(ArrayList<Card> cards) {
+    protected static boolean isThreeOfAKind(ArrayList<Card> cards) {
     	/***
          * first for loop goes from first card to third last
          * second from second card to second last
@@ -112,7 +118,7 @@ public enum HandType {
     }
     
     
-    public static boolean isStraight(ArrayList<Card> cards) {
+    protected static boolean isStraight(ArrayList<Card> cards) {
     	/***
          * At fist we clone and then sort the cards using the sort() method
          * we can now assume in order to check a straight hand each card 
@@ -131,7 +137,7 @@ public enum HandType {
     }
     
     
-    public static boolean isFlush(ArrayList<Card> cards) {
+    protected static boolean isFlush(ArrayList<Card> cards) {
     	/***
     	 * checks if all the cards have the same suit
     	 * ***/
@@ -146,7 +152,7 @@ public enum HandType {
     }
     
     
-    public static boolean isFullHouse(ArrayList<Card> cards) {
+    protected static boolean isFullHouse(ArrayList<Card> cards) {
     	/***
     	 * This only works since we've sorted the list
     	 * if 1st card = 2nd card & 3rd card = 5th card OR
@@ -163,7 +169,7 @@ public enum HandType {
     }
     
     
-    public static boolean isFourOfAKind(ArrayList<Card> cards) {
+    protected static boolean isFourOfAKind(ArrayList<Card> cards) {
     	boolean found = false;
     	/***
     	 * Since we are dealing with a sorted ArrayList, we only have to 
@@ -178,7 +184,7 @@ public enum HandType {
     }
     
     
-    public static boolean isStraightFlush(boolean straight, boolean flush) {
+    protected static boolean isStraightFlush(boolean straight, boolean flush) {
     	/***
     	 * if a hand has been proven to be both a straight and a flush,
     	 * we don't bother checking again and just return true
@@ -190,7 +196,7 @@ public enum HandType {
         }   
     }
     
-    public static boolean isRoyalFlush(ArrayList<Card> cards, boolean straightFlush) {
+    protected static boolean isRoyalFlush(ArrayList<Card> cards, boolean straightFlush) {
     	/***
     	 * If the hand is a straight-flush we only need to check whether or
     	 * not there's an ace in it. Since it is a straight, the Ace being 
@@ -204,5 +210,6 @@ public enum HandType {
     		} 
     	} return false;
     }
+    
     
 }

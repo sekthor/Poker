@@ -85,6 +85,8 @@ public class HandTypeTest {
 			};
 	
 	
+	
+	
 	// This is where we store the translated hands
 	ArrayList<ArrayList<Card>> highCardHands;
 	ArrayList<ArrayList<Card>> pairHands;
@@ -275,7 +277,7 @@ public class HandTypeTest {
 		}
 	}
 	
-	//@Test
+	@Test
 	public void testIsRoyalFlush() {
 		
 		for (ArrayList<Card> hand : straightFlushHands) {
@@ -289,6 +291,8 @@ public class HandTypeTest {
 															HandType.isFlush(hand))));
 		}
 	}
+	
+	
 	
 	/**
 	 * Make an ArrayList of hands from an array of string-arrays

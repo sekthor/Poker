@@ -9,6 +9,7 @@ import application.model.DeckOfCards;
 import application.model.HandType;
 import application.model.Player;
 import application.model.PokerGameModel;
+import application.model.Winner;
 import application.view.PlayerPane;
 import application.view.PokerGameView;
 import javafx.event.Event;
@@ -71,44 +72,20 @@ public class PokerGameController {
             Alert alert = new Alert(AlertType.ERROR, "Not enough cards - shuffle first");
             alert.showAndWait();
     	}
-    	evaluateWinner();
     	
-    }
-    
-    
-    
-    private void evaluateWinner() {
     	ArrayList<Player> players = new ArrayList<Player>();
     	for (int i = 0; i < PokerGame.NUM_PLAYERS; i++) {
-    		players.add(model.getPlayer(i));
+    		players.add(model.getPlayer(i)) ;   		    		
     	}
-    	
-    	Player p = players.get(0);
-    	for(int i = 1; i<players.size(); i++) {
-    		Player p2 = players.get(i);
-    		if (p2.getHandOrdinal() == p.getHandOrdinal()) {
-    			if(tiebreak(p.getCards(), p2.getCards())) {
-    				p = p2;
-    			}
-    		} else if (p2.getHandOrdinal() > p.getHandOrdinal()) {
-    			p = p2;
-    		}
-    	}
-    	p.addWin();
-    	for (int i = 0; i< players.size(); i++) {
-    		PlayerPane pp = view.getPlayerPane(i);
-    		pp.updatePlayerDisplay();
-    	}
-    	
+    	int winner = Winner.evaluateWinner(players);
+    	model.getPlayer(winner).addWin();
+    	view.getPlayerPane(winner).updatePlayerDisplay();
     }
     
+     
     
     
-    private boolean tiebreak(ArrayList<Card> hand1, ArrayList<Card> hand2) {
-    	// If hand 2 wins, return true
-    	return false;
-    }
-    
+     
     private void addPlayer(Event e) {
     	/***
     	 * this method is called when add playerButton is pressed
