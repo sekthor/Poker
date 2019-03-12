@@ -14,19 +14,41 @@ public class Winner {
 		for (Player p : players) {
 			hands.add(p.getHand());
 		}
+		Player winner = players.get(0);
     	HandType winningHand = hands.get(0);
-    	for(int i = 1; i < hands.size(); i++) {
-    		if (winningHand.ordinal() < hands.get(i).ordinal()) {
-    			winningHand = hands.get(i);
-    		} else if (winningHand.ordinal() == hands.get(i).ordinal()) {
-    			
+    	for(int i = 1; i < players.size(); i++) {
+    		if (winner.getHand().ordinal() < players.get(i).getHand().ordinal()) {
+    			winner = players.get(i);
+    		} else if (winner.getHand().ordinal() == players.get(i).getHand().ordinal()) {
+    			winner = tiebreak(winner, players.get(i));
     		}
     	} 
-    	return hands.indexOf(winningHand);
-    	
+    	return hands.indexOf(winningHand);	
     }
 	
-	private static void tiebreak() {
-		
+	private static Player tiebreak(Player p1, Player p2) {
+		switch(p1.getHand()) {
+			case HighCard:
+				break;
+			case OnePair:
+				break;
+			case TwoPair:
+				break;
+			case ThreeOfAKind:
+				break;
+			case Straight:
+				break;
+			case Flush:
+				break;
+			case FullHouse:
+				break;
+			case FourOfAKind:
+				break;
+			case StraightFlush:
+				break;
+			case RoyalFlush:
+				break;
+		}
+		return p1;
 	}
 }
