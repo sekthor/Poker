@@ -30,6 +30,7 @@ public class PokerGameController {
 		view.getShuffleButton().setOnAction( e -> shuffle() );
 		view.getDealButton().setOnAction( e -> deal() );
 		view.getAddButton().setOnAction(this::addPlayer);
+		view.getRemoveButton().setOnAction(this::rmvPlayer);
 		
 		
 	}
@@ -97,5 +98,11 @@ public class PokerGameController {
     	pokerGame.addPlayer();
     	model.addPlayer();
     	view.addPlayer();
+    }
+    
+    private void rmvPlayer(Event e) {
+    	pokerGame.rmvPlayer();
+    	model.rmvPlayer();
+    	view.rmvPlayer(pokerGame.NUM_PLAYERS);
     }
 }

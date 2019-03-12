@@ -27,4 +27,8 @@ public class PokerGame extends Application {
     public void addPlayer() {
     	this.NUM_PLAYERS += 1;
     }
+    
+    public void rmvPlayer() {
+    	this.NUM_PLAYERS -= 1;
+    }
 }

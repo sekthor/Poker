@@ -1,6 +1,6 @@
 .label {
 	-fx-padding: 5.0px;
-    -fx-min-width: 200.0;
+    /*-fx-min-width: 200.0;*/
     -fx-max-width: 2000.0;
   	-fx-alignment: center;
   	-fx-text-fill: white;
@@ -53,8 +53,24 @@
 	-fx-background-position: center;
 	-fx-text-fill: #800000;
 }
+
 .button{
 	-fx-background-color: black;
 	-fx-text-fill: white;
 	-fx-padding: 10px;
 }
+
+.menu-bar{
+	-fx-color: black;
+	-fx-background-color: #800000;
+	-fx-border-color: white;
+	}
+	
+.menu-item{
+	-fx-background-color: #800000;
+	-fx-border-color: white;
+}
+.menu{
+	-fx-width: 50px;
+}
+

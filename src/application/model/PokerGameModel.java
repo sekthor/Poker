@@ -32,4 +32,8 @@ public class PokerGameModel {
 		 * */
 		players.add(new Player("Player " + (PokerGame.NUM_PLAYERS-1)));
 	}
+	
+	public void rmvPlayer() {
+		players.remove(PokerGame.NUM_PLAYERS);
+	}
 }

@@ -3,6 +3,9 @@ package application.view;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
@@ -16,9 +19,11 @@ import application.model.PokerGameModel;
 public class PokerGameView {
 	private HBox players;
 	private ControlArea controls;
-	
+	private MenuBar menu;
 	
 	private PokerGameModel model;
+	private MenuItem addPlayer;
+	private MenuItem rmvPlayer;
 	
 	public PokerGameView(Stage stage, PokerGameModel model) {
 		this.model = model;
@@ -35,11 +40,23 @@ public class PokerGameView {
 		controls = new ControlArea();
 		controls.linkDeck(model.getDeck()); // link DeckLabel to DeckOfCards in the logic		
 		
+		menu = new MenuBar();
+		Menu playerMenu = new Menu("Players");
+		addPlayer = new MenuItem("Add Player");
+		rmvPlayer = new MenuItem("Remove Player");
+		playerMenu.getItems().addAll(addPlayer, rmvPlayer);
+		
+		menu.getMenus().add(playerMenu);
+		
+		
+		menu.getStyleClass().add("menu1");
+		playerMenu.getStyleClass().add("menu1");
+		rmvPlayer.getStyleClass().add("menu1");
 		
 		// Put players and controls into a BorderPane
 		BorderPane root = new BorderPane();
-		root.setTop(players);
-		//root.setCenter(deck);
+		root.setCenter(players);
+		root.setTop(menu);
 		root.setBottom(controls);
 		root.setId("root");
 		
@@ -66,16 +83,20 @@ public class PokerGameView {
 	public Button getDealButton() {
 		return controls.btnDeal;
 	}
-	public Button getAddButton() {
-		return this.controls.btnAdd;
+	public MenuItem getAddButton() {
+		return this.addPlayer;
 	}
-	public Button getRemoveButton() {
-		return this.controls.btnRemove;
+	public MenuItem getRemoveButton() {
+		return this.rmvPlayer;
 	}
 	
 	public void addPlayer() {
 		PlayerPane pp = new PlayerPane();
 		pp.setPlayer(model.getPlayer(PokerGame.NUM_PLAYERS-1)); // link to player object in the logic
 		players.getChildren().add(pp);
+	}
+	
+	public void rmvPlayer(int i) {
+		players.getChildren().remove(this.getPlayerPane(i));
 	}
 }
