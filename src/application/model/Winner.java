@@ -15,7 +15,7 @@ public class Winner {
 			hands.add(p.getHand());
 		}
 		Player winner = players.get(0);
-    	HandType winningHand = hands.get(0);
+    	
     	for(int i = 1; i < players.size(); i++) {
     		if (winner.getHand().ordinal() < players.get(i).getHand().ordinal()) {
     			winner = players.get(i);
@@ -23,7 +23,7 @@ public class Winner {
     			winner = tiebreak(winner, players.get(i));
     		}
     	} 
-    	return hands.indexOf(winningHand);	
+    	return players.indexOf(winner);	
     }
 	
 	private static Player tiebreak(Player p1, Player p2) {
