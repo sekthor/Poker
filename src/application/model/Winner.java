@@ -1,6 +1,10 @@
 package application.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
+import application.model.Card.Rank;
 
 public class Winner {
 
@@ -26,18 +30,80 @@ public class Winner {
     	return players.indexOf(winner);	
     }
 	
+	
+	
+	
 	private static Player tiebreak(Player p1, Player p2) {
-		switch(p1.getHand()) {
+		
+		ArrayList<Card> hand1 = (ArrayList<Card>) p1.getCards().clone();
+		ArrayList<Card> hand2 = (ArrayList<Card>) p2.getCards().clone();
+		Collections.sort(hand1);
+		Collections.sort(hand2);
+		
+		switch (p1.getHand()) {
+		
+		
 			case HighCard:
-				break;
+				if(hand1.get(4).compareTo(hand2.get(4))>0) {
+					return p1;
+				} else {
+					return p2;
+				}
+				
+				
 			case OnePair:
-				break;
+				Card.Rank pair1Rank = Rank.Two;
+				Card.Rank pair2Rank = Rank.Two;
+				boolean found = false;
+				for(int i = 0; i < hand1.size() && !found; i++) {
+					if (hand1.get(i).getRank() == hand1.get(i+1).getRank()) {
+						pair1Rank = hand1.get(i).getRank();
+						found = true;
+					}
+				}
+				found= false;
+				for(int i = 0; i < hand2.size() && !found; i++) {
+					if (hand2.get(i).getRank() == hand2.get(i+1).getRank()) {
+						pair2Rank = hand2.get(i).getRank();
+						found = true;
+					}
+				}
+				if (pair1Rank.ordinal() > pair2Rank.ordinal()) {
+					return p1;
+				} else {
+					return p2;
+				}
+				
+			
 			case TwoPair:
 				break;
+				
+				
 			case ThreeOfAKind:
-				break;
+				/*
+				 * Since the ArrayList is sorted, the third Card (position 2) will always
+				 * be part of the ThreeOfAKind. so we only need to compare the ranks of 
+				 * the two cards on position 2.
+				 */
+				if(hand1.get(2).getRank().ordinal() > hand2.get(2).getRank().ordinal()) {
+					return p1;
+				} else {
+					return p2;
+				}
+				
+				
 			case Straight:
-				break;
+				/*
+				 * Since the ArrayList is sorted, we only need to check which hand has the highest 
+				 * card at the end.
+				 */
+				if (hand1.get(4).getRank().ordinal() > hand2.get(4).getRank().ordinal()) {
+					return p1;
+				} else {
+					return p2;
+				}
+				
+				
 			case Flush:
 				break;
 			case FullHouse:
