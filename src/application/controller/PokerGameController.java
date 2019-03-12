@@ -73,6 +73,9 @@ public class PokerGameController {
             alert.showAndWait();
     	}
     	
+    	/*
+    	 * Here we determine the Winner
+    	 */
     	ArrayList<Player> players = new ArrayList<Player>();
     	for (int i = 0; i < PokerGame.NUM_PLAYERS; i++) {
     		players.add(model.getPlayer(i)) ;   		    		
