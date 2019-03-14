@@ -9,9 +9,7 @@ import javafx.scene.image.ImageView;
 public class CardLabel extends Label {
 	public CardLabel() {
 		super();
-		this.getStyleClass().add("card");
-		
-		
+		this.getStyleClass().add("card");		
 	}
 
 	public void setCard(Card card) {

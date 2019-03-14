@@ -12,7 +12,7 @@ public class PokerGameModel {
 	
 	public PokerGameModel() {
 		for (int i = 0; i < PokerGame.NUM_PLAYERS; i++) {
-			players.add(new Player("Player " + i));
+			players.add(new Player("Player " + (i+1)));
 		}
 		
 		deck = new DeckOfCards();
@@ -30,7 +30,7 @@ public class PokerGameModel {
 		/***
 		 * This method adds a new Player to the ArrayList of players
 		 * */
-		players.add(new Player("Player " + (PokerGame.NUM_PLAYERS-1)));
+		players.add(new Player("Player " + (PokerGame.NUM_PLAYERS)));
 	}
 	
 	public void rmvPlayer() {
