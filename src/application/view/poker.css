@@ -39,7 +39,7 @@
 
 .card {
     -fx-font-size: 18px;
-	-fx-padding: 2.0px;
+	-fx-padding: 5px;
     -fx-border-color: white;
     -fx-border-width: 1.0px;
 	-fx-background-color: black;
@@ -99,12 +99,18 @@
 }
 
 #deckimg{
-	-fx-pref-width: 100px;
+	-fx-border-color: white;
+	-fx-background-color: black;
 }
 
-.Statistics{
-	-fx-padding: 30px;
+.stats{
+	-fx-padding: 0px,20px,0px,0px;
 }
+
+#deck{
+	-fx-max-width: 60; 
+}
+
 
 
 

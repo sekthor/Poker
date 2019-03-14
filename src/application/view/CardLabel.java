@@ -10,10 +10,7 @@ public class CardLabel extends Label {
 	public CardLabel() {
 		super();
 		this.getStyleClass().add("card");
-		Image image = new Image(this.getClass().getClassLoader().getResourceAsStream("images/clover.png"));
-		ImageView imv = new ImageView(image);
 		
-		this.setGraphic(imv);
 		
 	}
 
@@ -27,7 +24,13 @@ public class CardLabel extends Label {
 			imv.setPreserveRatio(true);
 			this.setGraphic(imv);
 		} else {
-			this.setGraphic(null);
+			
+			Image image = new Image(this.getClass().getClassLoader().getResourceAsStream("images/clover.png"));
+			ImageView imv = new ImageView(image);
+			imv.fitWidthProperty().bind(this.widthProperty());
+			imv.fitHeightProperty().bind(this.heightProperty());
+			imv.setPreserveRatio(false);
+			this.setGraphic(imv);
 		}
 	}
 

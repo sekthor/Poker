@@ -1,14 +1,12 @@
 package application.view;
 
-import java.io.File;
+
 
 //import java.io.FileInputStream;
 
 
 import application.model.DeckOfCards;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -24,10 +22,15 @@ public class ControlArea extends HBox{
     public ControlArea() {
     	super(); // Always call super-constructor first !!
     	
-    	this.getChildren().addAll(lblDeck, spacer, btnShuffle, btnDeal);
+    	CardLabel deck = new CardLabel();
+		deck.setCard(null);
+		deck.setId("deck");
+    	
+    	this.getChildren().addAll(deck, lblDeck, spacer, btnShuffle, btnDeal);
 
         HBox.setHgrow(spacer, Priority.ALWAYS); // Use region to absorb resizing
         this.setId("controlArea"); // Unique ID in the CSS
+        
     }
     
     public void linkDeck(DeckOfCards deck) {
