@@ -10,6 +10,10 @@ public class CardLabel extends Label {
 	public CardLabel() {
 		super();
 		this.getStyleClass().add("card");
+		Image image = new Image(this.getClass().getClassLoader().getResourceAsStream("images/clover.png"));
+		ImageView imv = new ImageView(image);
+		
+		this.setGraphic(imv);
 		
 	}
 

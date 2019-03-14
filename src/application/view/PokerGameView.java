@@ -24,6 +24,7 @@ public class PokerGameView {
 	private PokerGameModel model;
 	private MenuItem addPlayer;
 	private MenuItem rmvPlayer;
+	private Statistics stats;
 	
 	public PokerGameView(Stage stage, PokerGameModel model) {
 		this.model = model;
@@ -40,24 +41,26 @@ public class PokerGameView {
 		controls = new ControlArea();
 		controls.linkDeck(model.getDeck()); // link DeckLabel to DeckOfCards in the logic		
 		
+		
+		// menu
 		menu = new MenuBar();
 		Menu playerMenu = new Menu("Players");
 		addPlayer = new MenuItem("Add Player");
 		rmvPlayer = new MenuItem("Remove Player");
 		playerMenu.getItems().addAll(addPlayer, rmvPlayer);
-		
 		menu.getMenus().add(playerMenu);
+		//menu.getStyleClass().add("menu1");
+		//playerMenu.getStyleClass().add("menu1");
+		//rmvPlayer.getStyleClass().add("menu1");
 		
-		
-		menu.getStyleClass().add("menu1");
-		playerMenu.getStyleClass().add("menu1");
-		rmvPlayer.getStyleClass().add("menu1");
+		stats = new Statistics();
 		
 		// Put players and controls into a BorderPane
 		BorderPane root = new BorderPane();
 		root.setCenter(players);
 		root.setTop(menu);
 		root.setBottom(controls);
+		root.setLeft(stats);
 		root.setId("root");
 		
 		// Disallow resizing - which is difficult to get right with images
