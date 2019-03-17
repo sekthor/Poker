@@ -9,6 +9,7 @@ import application.PokerGame;
 public class PokerGameModel {
 	private final ArrayList<Player> players = new ArrayList<>();
 	private DeckOfCards deck;
+	private Statistics stats;
 	
 	public PokerGameModel() {
 		for (int i = 0; i < PokerGame.NUM_PLAYERS; i++) {
@@ -16,6 +17,7 @@ public class PokerGameModel {
 		}
 		
 		deck = new DeckOfCards();
+		stats = new Statistics();
 	}
 	
 	public Player getPlayer(int i) {
@@ -24,6 +26,10 @@ public class PokerGameModel {
 	
 	public DeckOfCards getDeck() {
 		return deck;
+	}
+	
+	public Statistics getStats() {
+		return stats;
 	}
 	
 	public void addPlayer() {

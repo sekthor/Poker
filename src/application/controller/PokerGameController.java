@@ -9,6 +9,7 @@ import application.model.DeckOfCards;
 import application.model.HandType;
 import application.model.Player;
 import application.model.PokerGameModel;
+import application.model.Statistics;
 import application.model.Winner;
 import application.view.PlayerPane;
 import application.view.PokerGameView;
@@ -68,6 +69,9 @@ public class PokerGameController {
         			p.addCard(card);
         		}
         		p.evaluateHand();
+        		model.getStats();
+				Statistics.addHand(p.getHand());
+        		view.getStatsView().updateStats();
         		PlayerPane pp = view.getPlayerPane(i);
         		pp.updatePlayerDisplay();
         	}

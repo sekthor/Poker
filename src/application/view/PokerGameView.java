@@ -26,7 +26,7 @@ public class PokerGameView {
 	private PokerGameModel model;
 	private MenuItem addPlayer;
 	private MenuItem rmvPlayer;
-	private Statistics stats;
+	private StatisticsView stats;
 	
 	public PokerGameView(Stage stage, PokerGameModel model) {
 		this.model = model;
@@ -62,7 +62,8 @@ public class PokerGameView {
 		//playerMenu.getStyleClass().add("menu1");
 		//rmvPlayer.getStyleClass().add("menu1");
 		
-		stats = new Statistics();
+		stats = new StatisticsView();
+		stats.setStats(model.getStats());
 		
 		// Put players and controls into a BorderPane
 		BorderPane root = new BorderPane();
@@ -100,6 +101,9 @@ public class PokerGameView {
 	}
 	public MenuItem getRemoveButton() {
 		return this.rmvPlayer;
+	}
+	public StatisticsView getStatsView() {
+		return this.stats;
 	}
 	
 	public void addPlayer() {
