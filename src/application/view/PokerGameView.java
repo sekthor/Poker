@@ -9,6 +9,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -17,7 +18,8 @@ import application.PokerGame;
 import application.model.PokerGameModel;
 
 public class PokerGameView {
-	private HBox players;
+	private GridPane players;
+	//private HBox players;
 	private ControlArea controls;
 	private MenuBar menu;
 	
@@ -30,12 +32,19 @@ public class PokerGameView {
 		this.model = model;
 		
 		// Create all of the player panes we need, and put them into an HBox
-		players = new HBox();
-		for (int i = 0; i < PokerGame.NUM_PLAYERS; i++) {
-			PlayerPane pp = new PlayerPane();
-			pp.setPlayer(model.getPlayer(i)); // link to player object in the logic
-			players.getChildren().add(pp);
+		players = new GridPane();
+		//players = new HBox();
+		
+		int count = 0;
+		for (int i = 0; i < (PokerGame.NUM_PLAYERS/3+1); i++) {
+			for (int j = 0; j<3 && count<PokerGame.NUM_PLAYERS; j++) {
+				PlayerPane pp = new PlayerPane();
+				pp.setPlayer(model.getPlayer(count));
+				players.add(pp, j, i);
+				count++;
+			}
 		}
+		
 		
 		// Create the control area
 		controls = new ControlArea();
@@ -96,7 +105,9 @@ public class PokerGameView {
 	public void addPlayer() {
 		PlayerPane pp = new PlayerPane();
 		pp.setPlayer(model.getPlayer(PokerGame.NUM_PLAYERS-1)); // link to player object in the logic
-		players.getChildren().add(pp);
+		int col = (PokerGame.NUM_PLAYERS-1)%3;
+		int row = (PokerGame.NUM_PLAYERS-1)/3;
+		players.add(pp, col, row);
 	}
 	
 	public void rmvPlayer(int i) {
