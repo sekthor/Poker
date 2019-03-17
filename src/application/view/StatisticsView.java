@@ -1,9 +1,11 @@
 package application.view;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import application.model.HandType;
 import application.model.Statistics;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -11,6 +13,7 @@ import javafx.scene.layout.VBox;
 public class StatisticsView extends VBox{
 
 	private Label title;
+	private Label hands;
 	private Statistics stats;
 	private GridPane statsPane;
 	private ArrayList<Label> percentages;
@@ -18,12 +21,10 @@ public class StatisticsView extends VBox{
 	public StatisticsView() {
 		this.setId("stats");
 		
-		title = new Label();
-		title.setText("Statistics");
+		title = new Label("Statistics");
+		
+		hands = new Label("Total Hands: 0");
 		percentages = new ArrayList<Label>();
-		
-		
-		
 		statsPane = new GridPane();
 		
 		for (HandType hand : HandType.values()) {
@@ -34,13 +35,13 @@ public class StatisticsView extends VBox{
 			label2.setId(hand.toString()+"Value");
 			label2.setText("0 %");
 			label.getStyleClass().add("stats");
-			label2.getStyleClass().add("stats");
+			label2.getStyleClass().add("percent");
 			
 			statsPane.add(label,0,hand.ordinal());
 			statsPane.add(label2,1, hand.ordinal());			
 		}
     	
-		this.getChildren().addAll(title,statsPane);
+		this.getChildren().addAll(title,hands,statsPane);
 		
 	}
 	
@@ -49,9 +50,11 @@ public class StatisticsView extends VBox{
 	}
 	
 	public void updateStats() {
-		ArrayList<Integer> statistics = stats.getStats();
+		ArrayList<Double> statistics = stats.getStats();
+		DecimalFormat df = new DecimalFormat("###.#");
 		for (int i = 0; i < percentages.size(); i++) {
-			percentages.get(i).setText(statistics.get(i).toString()+" %");
+			percentages.get(i).setText(df.format(statistics.get(i))+" %");
 		}
+		hands.setText("Total Hands: "+stats.getTotal());
 	}
 }

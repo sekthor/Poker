@@ -104,7 +104,12 @@
 }
 
 .stats{
-	-fx-padding: 0px,20px,0px,0px;
+	-fx-padding: 5;
+}
+
+.percent{
+	-fx-pref-width:50px;
+	-fx-alignment: CENTER-RIGHT;
 }
 
 #deck{

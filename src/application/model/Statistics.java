@@ -23,12 +23,17 @@ public class Statistics {
 		handCount++;
 	}
 	
-	public static ArrayList<Integer> getStats(){
-		ArrayList<Integer> percentage = new ArrayList<Integer>();
+	public static ArrayList<Double> getStats(){
+		ArrayList<Double> percentage = new ArrayList<Double>();
 		for (Integer count : counters) {
-			percentage.add(100/handCount*count);
+			double result = 100.0/handCount*count;
+			percentage.add(result);
 		}
 		
 		return percentage;
+	}
+	
+	public int getTotal() {
+		return handCount;
 	}
 }
