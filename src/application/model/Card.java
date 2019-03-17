@@ -62,4 +62,8 @@ public class Card implements Comparable<Card>{
 		return this.rank.ordinal() - otherCard.rank.ordinal();
 		
 	}
+	
+	public int compareSuit(Card otherCard) {
+		return this.suit.ordinal() - otherCard.suit.ordinal();
+	}
 }

@@ -1,9 +1,9 @@
 TODO:
 
-- add all Hand-evaluation methods [check]
-- check winner
-- add win counter to Player
-- add win counter to GUI
+- add all Hand-evaluation methods 	[check]
+- check winner						[check]
+- add win counter to Player			[check]
+- add win counter to GUI			[check]
 - add animation text increase of winner when won
 - add deck to GUI
 - animation from deck to hand 

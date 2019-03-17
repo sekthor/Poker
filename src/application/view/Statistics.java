@@ -29,7 +29,7 @@ public class Statistics extends VBox{
 			Label label = new Label(hand.toString());
 			Label label2 = new Label();
 			label2.setId(hand.toString()+"Value");
-			label2.setText("00");
+			label2.setText("00 %");
 			label.getStyleClass().add("sats");
 			label2.getStyleClass().add("stats");
 			

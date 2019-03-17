@@ -33,6 +33,8 @@ public class Winner {
 	
 	
 	
+	
+	
 	private static Player tiebreak(Player p1, Player p2) {
 		
 		ArrayList<Card> hand1 = (ArrayList<Card>) p1.getCards().clone();
@@ -40,26 +42,18 @@ public class Winner {
 		Collections.sort(hand1);
 		Collections.sort(hand2);
 		
+		boolean player1wins = true;
+		
 		switch (p1.getHand()) {
 		
-		
 			case HighCard:
-				if(hand1.get(4).compareTo(hand2.get(4)) == 0) {
-					if(hand1.get(4).getSuit().ordinal() > hand2.get(4).getSuit().ordinal()) {
-						return p1;
-					} else {
-						return p2;
-					}
-				} else if(hand1.get(4).compareTo(hand2.get(4)) > 0) {
-					return p1;
-				} else {
-					return p2;
-				}
+				player1wins = hasHighestCard(hand1, hand2);
 				
 				
 			case OnePair:
 				Card.Rank pair1Rank = Rank.Two;
 				Card.Rank pair2Rank = Rank.Two;
+				
 				boolean found = false;
 				for(int i = 0; i < hand1.size() && !found; i++) {
 					if (hand1.get(i).getRank() == hand1.get(i+1).getRank()) {
@@ -137,6 +131,32 @@ public class Winner {
 			case RoyalFlush:
 				break;
 		}
-		return p1;
+		
+		
+		if (player1wins) {
+			return p1;
+		} else {
+			return p2;
+		}
 	}
+	
+	protected static boolean hasHighestCard(ArrayList<Card> hand1, ArrayList<Card> hand2) {
+		/*
+		 * Player with higher highest Card wins, if Cards match
+		 * next lower Cards are compared
+		 */
+		for (int i=hand1.size(); i >= 0; i--) {
+			if (hand1.get(4).compareTo(hand2.get(4))>0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return false;
+	}
+	
+	private static boolean hasHighestTriplet(ArrayList<Card> hand1, ArrayList<Card> hand2) {
+		return true;
+	}
+	
 }
