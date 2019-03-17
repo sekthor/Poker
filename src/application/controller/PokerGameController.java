@@ -97,14 +97,27 @@ public class PokerGameController {
     	 * this method is called when add playerButton is pressed
     	 * It executes the respective methods in View, Model, and PokerGame
     	 */
-    	pokerGame.addPlayer();
-    	model.addPlayer();
-    	view.addPlayer();
+    	
+    	if(PokerGame.NUM_PLAYERS<6) {
+    		pokerGame.addPlayer();
+    		model.addPlayer();
+    		view.addPlayer();
+    	} else {
+    		Alert alert = new Alert(AlertType.ERROR, "Six is the maximum ammount of players!");
+    		alert.showAndWait();
+    	}
+    	
     }
     
     private void rmvPlayer(Event e) {
-    	pokerGame.rmvPlayer();
-    	model.rmvPlayer();
-    	view.rmvPlayer(pokerGame.NUM_PLAYERS);
+    	if (PokerGame.NUM_PLAYERS > 2) {
+    		pokerGame.rmvPlayer();
+    		model.rmvPlayer();
+    		view.rmvPlayer(pokerGame.NUM_PLAYERS);
+    	} else {
+    		Alert alert = new Alert(AlertType.ERROR, "Two is the minimum ammount of players!");
+    		alert.showAndWait();
+    	}
+    	
     }
 }
