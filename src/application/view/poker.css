@@ -46,7 +46,7 @@
     -fx-min-width: 50;
     -fx-pref-width: 70;
     -fx-max-width: 500;
-    -fx-min-height: 65;
+    -fx-min-height: 75;
     -fx-pref-height: 95;
     -fx-max-height: 800;
    
@@ -111,6 +111,11 @@
 .percent{
 	-fx-pref-width:50px;
 	-fx-alignment: CENTER-RIGHT;
+	-fx-padding: 1px;
+}
+
+.percentlabel{
+	-fx-padding: 1px;
 }
 
 #deck{

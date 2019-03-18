@@ -33,13 +33,15 @@ public class StatisticsView extends VBox{
 			percentages.add(label2);
 			label.setId(hand.toString());
 			label2.setId(hand.toString()+"Value");
-			label2.setText("0 %");
+			label2.setText("0.0 %");
+			label.getStyleClass().add("percentlabel");
 			label2.getStyleClass().add("percent");
 			
 			statsPane.add(label,0,hand.ordinal());
 			statsPane.add(label2,1, hand.ordinal());			
 		}
     	
+		this.setSpacing(10);
 		this.getChildren().addAll(title,hands,statsPane);
 		
 	}
@@ -50,7 +52,7 @@ public class StatisticsView extends VBox{
 	
 	public void updateStats() {
 		ArrayList<Double> statistics = stats.getStats();
-		DecimalFormat df = new DecimalFormat("###.#");
+		DecimalFormat df = new DecimalFormat("##0.0");
 		for (int i = 0; i < percentages.size(); i++) {
 			percentages.get(i).setText(df.format(statistics.get(i))+" %");
 		}
@@ -59,7 +61,7 @@ public class StatisticsView extends VBox{
 	
 	public void resetLabels() {
 		for (int i = 0; i < percentages.size(); i++) {
-			percentages.get(i).setText("0 %");
+			percentages.get(i).setText("0.0 %");
 		}
 		hands.setText("Total Hands: 0");
 	}
