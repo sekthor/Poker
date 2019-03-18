@@ -34,7 +34,6 @@ public class StatisticsView extends VBox{
 			label.setId(hand.toString());
 			label2.setId(hand.toString()+"Value");
 			label2.setText("0 %");
-			label.getStyleClass().add("stats");
 			label2.getStyleClass().add("percent");
 			
 			statsPane.add(label,0,hand.ordinal());
@@ -56,5 +55,12 @@ public class StatisticsView extends VBox{
 			percentages.get(i).setText(df.format(statistics.get(i))+" %");
 		}
 		hands.setText("Total Hands: "+stats.getTotal());
+	}
+	
+	public void resetLabels() {
+		for (int i = 0; i < percentages.size(); i++) {
+			percentages.get(i).setText("0 %");
+		}
+		hands.setText("Total Hands: 0");
 	}
 }

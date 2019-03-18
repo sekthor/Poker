@@ -24,7 +24,7 @@ public class Winner {
     		if (winner.getHand().ordinal() < players.get(i).getHand().ordinal()) {
     			winner = players.get(i);
     		} else if (winner.getHand().ordinal() == players.get(i).getHand().ordinal()) {
-    			winner = tiebreak(winner, players.get(i));
+    			//winner = tiebreak(winner, players.get(i));
     		}
     	} 
     	return players.indexOf(winner);	

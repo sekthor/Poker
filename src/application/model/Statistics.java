@@ -23,6 +23,13 @@ public class Statistics {
 		handCount++;
 	}
 	
+	public void resetStats() {
+		handCount = 0;
+		for (int i = 0; i < counters.size(); i++) {
+			counters.set(i, 0);
+		}
+	}
+	
 	public static ArrayList<Double> getStats(){
 		ArrayList<Double> percentage = new ArrayList<Double>();
 		for (Integer count : counters) {

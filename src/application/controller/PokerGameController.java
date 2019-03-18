@@ -30,8 +30,9 @@ public class PokerGameController {
 		
 		view.getShuffleButton().setOnAction( e -> shuffle() );
 		view.getDealButton().setOnAction( e -> deal() );
-		view.getAddButton().setOnAction(this::addPlayer);
-		view.getRemoveButton().setOnAction(this::rmvPlayer);
+		view.getAddButton().setOnAction(e -> addPlayer());
+		view.getRemoveButton().setOnAction(e -> rmvPlayer());
+		view.getResetStatsButton().setOnAction(e -> resetStats());
 		
 		
 	}
@@ -96,7 +97,7 @@ public class PokerGameController {
     
     
      
-    private void addPlayer(Event e) {
+    private void addPlayer() {
     	/***
     	 * this method is called when add playerButton is pressed
     	 * It executes the respective methods in View, Model, and PokerGame
@@ -113,7 +114,7 @@ public class PokerGameController {
     	
     }
     
-    private void rmvPlayer(Event e) {
+    private void rmvPlayer() {
     	if (PokerGame.NUM_PLAYERS > 2) {
     		pokerGame.rmvPlayer();
     		model.rmvPlayer();
@@ -123,5 +124,10 @@ public class PokerGameController {
     		alert.showAndWait();
     	}
     	
+    }
+    
+    private void resetStats() {
+    	model.getStats().resetStats();
+    	view.getStatsView().resetLabels();
     }
 }

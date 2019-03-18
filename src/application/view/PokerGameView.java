@@ -26,6 +26,7 @@ public class PokerGameView {
 	private PokerGameModel model;
 	private MenuItem addPlayer;
 	private MenuItem rmvPlayer;
+	private MenuItem resetStats;
 	private StatisticsView stats;
 	
 	public PokerGameView(Stage stage, PokerGameModel model) {
@@ -53,17 +54,24 @@ public class PokerGameView {
 		
 		// menu
 		menu = new MenuBar();
+		
 		Menu playerMenu = new Menu("Players");
 		addPlayer = new MenuItem("Add Player");
 		rmvPlayer = new MenuItem("Remove Player");
 		playerMenu.getItems().addAll(addPlayer, rmvPlayer);
-		menu.getMenus().add(playerMenu);
-		//menu.getStyleClass().add("menu1");
-		//playerMenu.getStyleClass().add("menu1");
-		//rmvPlayer.getStyleClass().add("menu1");
+		
+		Menu statistics = new Menu("Statistics");
+		resetStats = new MenuItem("Reset");
+		statistics.getItems().add(resetStats);
+		
+		
+		
+		menu.getMenus().addAll(playerMenu, statistics);
+		
 		
 		stats = new StatisticsView();
 		stats.setStats(model.getStats());
+		stats.getStyleClass().add("stats");
 		
 		// Put players and controls into a BorderPane
 		BorderPane root = new BorderPane();
@@ -77,7 +85,7 @@ public class PokerGameView {
 		stage.setResizable(true);
 
         // Create the scene using our layout; then display it
-        Scene scene = new Scene(root,1000,600);
+        Scene scene = new Scene(root);
         scene.getStylesheets().add(
                 getClass().getResource("poker.css").toExternalForm());
         stage.setTitle("Poker Miniproject");
@@ -98,6 +106,9 @@ public class PokerGameView {
 	}
 	public MenuItem getAddButton() {
 		return this.addPlayer;
+	}
+	public MenuItem getResetStatsButton() {
+		return this.resetStats;
 	}
 	public MenuItem getRemoveButton() {
 		return this.rmvPlayer;

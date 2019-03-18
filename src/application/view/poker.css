@@ -29,7 +29,7 @@
 
 .player {
 	-fx-alignment:  top-center ;
-	-fx-padding: 5.0px;
+	-fx-padding: 20px;
 	-fx-background-color: transparent;
     -fx-border-color: white;
     -fx-border-width: 1px;
@@ -39,15 +39,15 @@
 
 .card {
     -fx-font-size: 18px;
-	-fx-padding: 5px;
+	-fx-padding: 10px;
     -fx-border-color: white;
     -fx-border-width: 1.0px;
 	-fx-background-color: black;
     -fx-min-width: 50;
-    -fx-pref-width: 60;
+    -fx-pref-width: 70;
     -fx-max-width: 500;
-    -fx-min-height: 80;
-    -fx-pref-height: 90;
+    -fx-min-height: 65;
+    -fx-pref-height: 95;
     -fx-max-height: 800;
    
 }
@@ -59,7 +59,7 @@
 }
 
 #root{
-	-fx-background-image: url("../../images/backgroundfadedark.png");
+	-fx-background-image: url("../../images/background.png");
 	-fx-background-position: center;
 	-fx-text-fill: #800000;
 }
@@ -105,6 +105,7 @@
 
 .stats{
 	-fx-padding: 5;
+	-fx-border-color: white;
 }
 
 .percent{
@@ -115,6 +116,7 @@
 #deck{
 	-fx-max-width: 60; 
 }
+
 
 
 
