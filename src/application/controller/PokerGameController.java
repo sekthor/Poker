@@ -1,21 +1,17 @@
 package application.controller;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import application.PokerGame;
 import application.model.Card;
 import application.model.DeckOfCards;
-import application.model.HandType;
 import application.model.Player;
 import application.model.PokerGameModel;
 import application.model.Statistics;
 import application.model.Winner;
+import application.view.Alert;
 import application.view.PlayerPane;
 import application.view.PokerGameView;
-import javafx.event.Event;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 
 
 public class PokerGameController {
@@ -77,7 +73,7 @@ public class PokerGameController {
         		pp.updatePlayerDisplay();
         	}
     	} else {
-            Alert alert = new Alert(AlertType.ERROR, "Not enough cards - shuffle first");
+            Alert alert = new Alert("Not enough cards - shuffle first");
             alert.showAndWait();
     	}
     	
@@ -108,7 +104,7 @@ public class PokerGameController {
     		model.addPlayer();
     		view.addPlayer();
     	} else {
-    		Alert alert = new Alert(AlertType.ERROR, "Six is the maximum ammount of players!");
+    		Alert alert = new Alert("Six is the maximum ammount of players!");
     		alert.showAndWait();
     	}
     	
@@ -120,7 +116,7 @@ public class PokerGameController {
     		model.rmvPlayer();
     		view.rmvPlayer(pokerGame.NUM_PLAYERS);
     	} else {
-    		Alert alert = new Alert(AlertType.ERROR, "Two is the minimum ammount of players!");
+    		Alert alert = new Alert("Two is the minimum ammount of players!");
     		alert.showAndWait();
     	}
     	

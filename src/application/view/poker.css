@@ -83,7 +83,7 @@
 	
 .menu-item{
 	-fx-background-color: #5f1919;
-	-fx-border-color: white;
+	/*-fx-border-color: white;*/
 }
 
 .menu-item:hover{
@@ -104,8 +104,8 @@
 }
 
 .stats{
-	-fx-padding: 5;
-	-fx-border-color: white;
+	-fx-padding: 5,0,5,0;
+	
 }
 
 .percent{
@@ -123,7 +123,9 @@
 }
 
 
-
+.alert{
+	-fx-background-color: black;
+}
 
 
 
