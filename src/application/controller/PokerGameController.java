@@ -74,7 +74,7 @@ public class PokerGameController {
         	}
     	} else {
             Alert alert = new Alert("Not enough cards - shuffle first");
-            alert.showAndWait();
+            alert.show();
     	}
     	
     	/*
