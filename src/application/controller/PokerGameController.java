@@ -18,6 +18,7 @@ public class PokerGameController {
 	private PokerGameModel model;
 	private PokerGameView view;
 	private PokerGame pokerGame;
+	private boolean shuffleMode = false;
 	
 	public PokerGameController(PokerGameModel model, PokerGameView view, PokerGame pokerGame) {
 		this.model = model;
@@ -29,6 +30,7 @@ public class PokerGameController {
 		view.getAddButton().setOnAction(e -> addPlayer());
 		view.getRemoveButton().setOnAction(e -> rmvPlayer());
 		view.getResetStatsButton().setOnAction(e -> resetStats());
+		view.getAutoShuffleButton().setOnAction(e -> changeAutoShuffleMode());
 		
 		
 	}
@@ -72,21 +74,29 @@ public class PokerGameController {
         		PlayerPane pp = view.getPlayerPane(i);
         		pp.updatePlayerDisplay();
         	}
+        	
+        	ArrayList<Player> players = new ArrayList<Player>();
+        	for (int i = 0; i < PokerGame.NUM_PLAYERS; i++) {
+        		players.add(model.getPlayer(i)) ;   		    		
+        	}
+        	int winner = Winner.evaluateWinner(players);
+        	model.getPlayer(winner).addWin();
+        	view.getPlayerPane(winner).updatePlayerDisplay();
+        	
     	} else {
-            Alert alert = new Alert("Not enough cards - shuffle first");
-            alert.show();
+    		if (shuffleMode) {
+    			shuffle();
+    		} else {
+    			Alert alert = new Alert("Not enough cards - shuffle first");
+    			alert.show();
+    		}
+            
     	}
     	
     	/*
     	 * Here we determine the Winner
     	 */
-    	ArrayList<Player> players = new ArrayList<Player>();
-    	for (int i = 0; i < PokerGame.NUM_PLAYERS; i++) {
-    		players.add(model.getPlayer(i)) ;   		    		
-    	}
-    	int winner = Winner.evaluateWinner(players);
-    	model.getPlayer(winner).addWin();
-    	view.getPlayerPane(winner).updatePlayerDisplay();
+    	
     }
     
      
@@ -125,5 +135,14 @@ public class PokerGameController {
     private void resetStats() {
     	model.getStats().resetStats();
     	view.getStatsView().resetLabels();
+    }
+    
+    private void changeAutoShuffleMode() {
+    	this.shuffleMode = !this.shuffleMode;
+    	if(shuffleMode) {
+    		view.setAutoShuffleText("Disable Auto-Shuffle");
+    	} else {
+    		view.setAutoShuffleText("Enable Auto-Shuffle");
+    	}
     }
 }
