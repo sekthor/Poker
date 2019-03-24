@@ -41,18 +41,27 @@ public class Winner {
 		ArrayList<Card> hand2 = (ArrayList<Card>) p2.getCards().clone();
 		Collections.sort(hand1);
 		Collections.sort(hand2);
+		int comp, comp2; //used to store compareTo return values
 		
 		boolean player1wins = true;
 		
 		switch (p1.getHand()) {
-		
+			
+			
 			case HighCard:
+				/*
+				 * The player with the highest card in his hand wins
+				 */
 				player1wins = hasHighestCard(hand1, hand2);
 				break;
 				
 				
 			case OnePair:
-				int comp = getPairCard(hand1).compareTo(getPairCard(hand2));
+				/*
+				 * In this case we get a Card from the pair of both Hand, and compare
+				 * their ranks. If they match the player with the highest card wins.
+				 */
+				comp = getPairCard(hand1).compareTo(getPairCard(hand2));
 				if(comp == 0) {
 					player1wins = hasHighestCard(hand1,hand2);
 				} else if( comp > 0) {
@@ -62,9 +71,49 @@ public class Winner {
 				}
 				break;
 			
+				
+			
 			case TwoPair:
-				
-				
+				/*
+				 * works the same way OnePair does however if the higher pairs match
+				 * the lower pairs are compared. Only if those match as well, we evaluate
+				 * highest card. 
+				 */
+				comp = getPairCard(hand1).compareTo(getPairCard(hand2));
+				if(comp == 0) {
+					boolean found = false;
+					for(int i=hand1.size()-1; !found; i--) {
+						// in reverse order so removal of cards won't affect ordinals 
+						if (hand1.get(i).compareTo(hand1.get(i-1))==0) {
+							hand1.remove(i);
+							hand1.remove(i-1);
+							System.out.println("Card removed");
+							found = true;
+						}
+					}
+					found = false;
+					for(int i=hand2.size()-1; !found; i--) {
+						// in reverse order so removal of cards won't affect ordinals 
+						if (hand2.get(i).compareTo(hand2.get(i-1))==0) {
+							hand2.remove(i);
+							hand2.remove(i-1);
+							System.out.println("Card removed");
+							found = true;
+						}
+					}
+					comp2 = getPairCard(hand1).compareTo(getPairCard(hand2));
+					if(comp2 == 0) {
+						player1wins = hasHighestCard(hand1,hand2);
+					} else if( comp > 0) {
+						player1wins = true;
+					} else {
+						player1wins = false;
+					}
+				} else if( comp > 0) {
+					player1wins = true;
+				} else {
+					player1wins = false;
+				}
 				break;
 				
 			case ThreeOfAKind:
@@ -131,7 +180,7 @@ public class Winner {
 		 * next lower Cards are compared
 		 */
 		for (int i=hand1.size(); i >= 0; i--) {
-			if (hand1.get(4).compareTo(hand2.get(4))>0) {
+			if (hand1.get(hand1.size()-1).compareTo(hand1.get(hand1.size()-1))>0) {
 				return true;
 			} else {
 				return false;
@@ -155,7 +204,20 @@ public class Winner {
 		return card;
 	}
 	
-	
+	private static ArrayList<Card> removeHigherPair(ArrayList<Card> hand) {
+		boolean found = false;
+		for(int i=hand.size()-1; i<0 && !found; i--) {
+			// in reverse order so removal of cards won't affect ordinals 
+			System.out.print("l");
+			if (hand.get(i).compareTo(hand.get(i-1))==0) {
+				hand.remove(i);
+				hand.remove(i-1);
+				System.out.println("Card removed");
+				found = true;
+			}
+		}
+		return hand;
+	}
 	
 	private static boolean hasHighestTriplet(ArrayList<Card> hand1, ArrayList<Card> hand2) {
 		return true;
