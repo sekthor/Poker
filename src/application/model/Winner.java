@@ -25,6 +25,7 @@ public class Winner {
     			winner = players.get(i);
     		} else if (winner.getHand().ordinal() == players.get(i).getHand().ordinal()) {
     			winner = tiebreak(winner, players.get(i));
+    			System.out.println("tiebreak, winner: "+ winner.getPlayerName() +"  "+ winner.getHand());
     		}
     	} 
     	return players.indexOf(winner);	
@@ -203,7 +204,7 @@ public class Winner {
 		 * next lower Cards are compared
 		 */
 		for (int i=hand1.size(); i >= 0; i--) {
-			if (hand1.get(hand1.size()-1).compareTo(hand1.get(hand1.size()-1))>0) {
+			if (hand1.get(hand1.size()-1).compareTo(hand2.get(hand2.size()-1))>0) {
 				return true;
 			} else {
 				return false;
