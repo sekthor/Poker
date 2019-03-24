@@ -55,6 +55,6 @@ public class PlayerPane extends VBox {
     			lblEvaluation.setText("--");
     	}
     	winner.setText("Wins: " + Integer.toString(player.wins));
-    }
-   
+    	this.setStyle("-fx-border-color: white; -fx-padding: 20px;");
+    }   
 }

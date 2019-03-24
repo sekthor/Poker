@@ -25,6 +25,7 @@ public class PokerGameView {
 	private MenuItem rmvPlayer;
 	private MenuItem resetStats;
 	private MenuItem autoShuffle;
+	private MenuItem frameWinner;
 	private StatisticsView stats;
 	
 	public PokerGameView(Stage stage, PokerGameModel model) {
@@ -65,7 +66,8 @@ public class PokerGameView {
 		
 		Menu settings = new Menu("Settings");
 		autoShuffle = new MenuItem("Enable Auto-Shuffle");
-		settings.getItems().add(autoShuffle);
+		frameWinner = new MenuItem("Enable Winner-Frame");
+		settings.getItems().addAll(autoShuffle, frameWinner);
 		
 		
 		
@@ -121,6 +123,12 @@ public class PokerGameView {
 	}
 	public void setAutoShuffleText(String string) {
 		this.autoShuffle.setText(string);
+	}
+	public MenuItem getWinnerFrameButton() {
+		return this.frameWinner;
+	}
+	public void setWinnerFrameText(String string) {
+		this.frameWinner.setText(string);
 	}
 	public StatisticsView getStatsView() {
 		return this.stats;

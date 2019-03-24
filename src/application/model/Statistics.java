@@ -50,13 +50,7 @@ public class Statistics {
 	
 	public String getRanking() {
 		ArrayList<Player> players = (ArrayList<Player>) model.getPlayers().clone();
-		for (Player p : players) {
-			System.out.println(p.getPlayerName());
-		}
 		Collections.sort(players);
-		/*for (Player p : players) {
-			System.out.println(p.getPlayerName());
-		}*/
 		String string = "Rankings:";
 		int count = 1;
 		for (Player p : players) {

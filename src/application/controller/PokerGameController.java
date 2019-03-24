@@ -19,6 +19,7 @@ public class PokerGameController {
 	private PokerGameView view;
 	private PokerGame pokerGame;
 	private boolean shuffleMode = false;
+	private boolean frame = false;
 	
 	public PokerGameController(PokerGameModel model, PokerGameView view, PokerGame pokerGame) {
 		this.model = model;
@@ -31,6 +32,7 @@ public class PokerGameController {
 		view.getRemoveButton().setOnAction(e -> rmvPlayer());
 		view.getResetStatsButton().setOnAction(e -> resetStats());
 		view.getAutoShuffleButton().setOnAction(e -> changeAutoShuffleMode());
+		view.getWinnerFrameButton().setOnAction(e -> changeWinnerFrameMode());
 		
 		
 	}
@@ -78,13 +80,14 @@ public class PokerGameController {
         	/*
         	 * Here we determine the winner
         	 */
-        	ArrayList<Player> players = new ArrayList<Player>();
-        	for (int i = 0; i < PokerGame.NUM_PLAYERS; i++) {
-        		players.add(model.getPlayer(i)) ;   		    		
-        	}
-        	int winner = Winner.evaluateWinner(players);
+        	
+        	
+        	int winner = Winner.evaluateWinner(model.getPlayers());
         	model.getPlayer(winner).addWin();
         	view.getPlayerPane(winner).updatePlayerDisplay();
+        	if (frame) {
+        		view.getPlayerPane(winner).setStyle("-fx-padding: 11px; -fx-border-color: #5f1919; -fx-border-width: 10px;");
+        	}
         	view.getStatsView().updateStats();
         	
     	} else {
@@ -143,6 +146,14 @@ public class PokerGameController {
     		view.setAutoShuffleText("Disable Auto-Shuffle");
     	} else {
     		view.setAutoShuffleText("Enable Auto-Shuffle");
+    	}
+    }
+    private void changeWinnerFrameMode() {
+    	this.frame = !this.frame;
+    	if(frame) {
+    		view.setWinnerFrameText("Disable Winner-Frame");
+    	} else {
+    		view.setWinnerFrameText("Enable Winner-Frame");
     	}
     }
 }
