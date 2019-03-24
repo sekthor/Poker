@@ -70,10 +70,11 @@ public class PokerGameController {
         		p.evaluateHand();
         		model.getStats();
 				Statistics.addHand(p.getHand());
-        		view.getStatsView().updateStats();
+        		
         		PlayerPane pp = view.getPlayerPane(i);
         		pp.updatePlayerDisplay();
         	}
+        	
         	/*
         	 * Here we determine the winner
         	 */
@@ -84,12 +85,14 @@ public class PokerGameController {
         	int winner = Winner.evaluateWinner(players);
         	model.getPlayer(winner).addWin();
         	view.getPlayerPane(winner).updatePlayerDisplay();
+        	view.getStatsView().updateStats();
         	
     	} else {
     		if (shuffleMode) {
     			shuffle();
+    			deal();
     		} else {
-    			Alert alert = new Alert("Not enough cards - shuffle first");
+    			Alert alert = new Alert("Not enough cards - shuffle first\n\nTip: Enable Auto-Shuffle");
     			alert.show();
     		}  
     	}	
@@ -106,7 +109,7 @@ public class PokerGameController {
     	 */
     	
     	if(PokerGame.NUM_PLAYERS<6) {
-    		if(PokerGame.NUM_PLAYERS>=3) {
+    		if(PokerGame.NUM_PLAYERS>=2) {
     			view.setMaximize();
     		}
     		pokerGame.addPlayer();

@@ -61,12 +61,15 @@ public class Player implements Comparable<Player> {
     public void addWin() {
     	this.wins += 1;
     }
+    public int getWins() {
+    	return this.wins;
+    }
 
     /**
      * Hands are compared, based on the evaluation they have.
      */
     @Override
-    public int compareTo(Player o) {
-        return handType.compareTo(o.handType);
+    public int compareTo(Player otherPlayer) {
+       return otherPlayer.getWins() - this.wins;
     }
 }

@@ -17,11 +17,15 @@ public class PokerGameModel {
 		}
 		
 		deck = new DeckOfCards();
-		stats = new Statistics();
+		stats = new Statistics(this);
 	}
 	
 	public Player getPlayer(int i) {
 		return players.get(i);
+	}
+	
+	public ArrayList<Player> getPlayers(){
+		return this.players;
 	}
 	
 	public DeckOfCards getDeck() {
