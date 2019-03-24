@@ -24,7 +24,7 @@ public class Winner {
     		if (winner.getHand().ordinal() < players.get(i).getHand().ordinal()) {
     			winner = players.get(i);
     		} else if (winner.getHand().ordinal() == players.get(i).getHand().ordinal()) {
-    			//winner = tiebreak(winner, players.get(i));
+    			winner = tiebreak(winner, players.get(i));
     		}
     	} 
     	return players.indexOf(winner);	
@@ -87,7 +87,7 @@ public class Winner {
 						if (hand1.get(i).compareTo(hand1.get(i-1))==0) {
 							hand1.remove(i);
 							hand1.remove(i-1);
-							System.out.println("Card removed");
+							
 							found = true;
 						}
 					}
@@ -97,7 +97,7 @@ public class Winner {
 						if (hand2.get(i).compareTo(hand2.get(i-1))==0) {
 							hand2.remove(i);
 							hand2.remove(i-1);
-							System.out.println("Card removed");
+							
 							found = true;
 						}
 					}
@@ -115,6 +115,7 @@ public class Winner {
 					player1wins = false;
 				}
 				break;
+				
 				
 			case ThreeOfAKind:
 				/*
@@ -137,25 +138,15 @@ public class Winner {
 				
 				
 			case Straight:
-				/*
-				 * Since the ArrayList is sorted, we only need to check which hand has the highest 
-				 * card at the end.
-				 */
-				if (hand1.get(4).getRank().ordinal() == hand2.get(4).getRank().ordinal()) {
-					if (hand1.get(4).getSuit().ordinal() > hand2.get(4).getSuit().ordinal()) {
-						return p1;
-					} else {
-						return p2;
-					}
-				} else if (hand1.get(4).getRank().ordinal() > hand2.get(4).getRank().ordinal()){
-					return p1;
-				} else {
-					return p2;
-				}
+				player1wins = hasHighestCard(hand1, hand2);
+				break;
 				
 				
 			case Flush:
+				player1wins = hasHighestCard(hand1, hand2);
 				break;
+				
+				
 			case FullHouse:
 				break;
 			case FourOfAKind:
@@ -196,7 +187,6 @@ public class Winner {
 		Card card = null;
 		for (int i= hand.size()-1; i>0 && !found; i--) {
 			if(hand.get(i).getRank().ordinal() == hand.get(i-1).getRank().ordinal()) {
-				System.out.println(i);
 				card = hand.get(i);
 				found = true;
 			}	
@@ -204,20 +194,6 @@ public class Winner {
 		return card;
 	}
 	
-	private static ArrayList<Card> removeHigherPair(ArrayList<Card> hand) {
-		boolean found = false;
-		for(int i=hand.size()-1; i<0 && !found; i--) {
-			// in reverse order so removal of cards won't affect ordinals 
-			System.out.print("l");
-			if (hand.get(i).compareTo(hand.get(i-1))==0) {
-				hand.remove(i);
-				hand.remove(i-1);
-				System.out.println("Card removed");
-				found = true;
-			}
-		}
-		return hand;
-	}
 	
 	private static boolean hasHighestTriplet(ArrayList<Card> hand1, ArrayList<Card> hand2) {
 		return true;
