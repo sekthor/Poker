@@ -1,15 +1,19 @@
 package application.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 
 public class Statistics {
 	
 	public static int handCount;
 	public static ArrayList<Integer> counters;
+	protected PokerGameModel model;
 	
-	public Statistics() {
+	public Statistics(PokerGameModel model) {
 		handCount = 0;
 		counters = new ArrayList<Integer>();
+		this.model = model;
 		for (int i = 0; i < HandType.values().length; i++) {
 			int j = 0;
 			counters.add(j);
@@ -43,4 +47,23 @@ public class Statistics {
 	public int getTotal() {
 		return handCount;
 	}
+	
+	public String getRanking() {
+		ArrayList<Player> players = (ArrayList<Player>) model.getPlayers().clone();
+		for (Player p : players) {
+			System.out.println(p.getPlayerName());
+		}
+		Collections.sort(players);
+		/*for (Player p : players) {
+			System.out.println(p.getPlayerName());
+		}*/
+		String string = "Rankings:";
+		int count = 1;
+		for (Player p : players) {
+			string+= "\n"+count + ": " + p.getPlayerName();
+			count++;
+		}
+		return string;
+	}
+	
 }

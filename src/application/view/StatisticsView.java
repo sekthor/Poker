@@ -14,6 +14,7 @@ public class StatisticsView extends VBox{
 
 	private Label title;
 	private Label hands;
+	private Label rankings;
 	private Statistics stats;
 	private GridPane statsPane;
 	private ArrayList<Label> percentages;
@@ -27,6 +28,7 @@ public class StatisticsView extends VBox{
 		percentages = new ArrayList<Label>();
 		statsPane = new GridPane();
 		statsPane.getStyleClass().add("stats");
+		rankings = new Label("Rankings:\n1:\n2:\n");
 		
 		for (HandType hand : HandType.values()) {
 			Label label = new Label(hand.toString());
@@ -43,7 +45,7 @@ public class StatisticsView extends VBox{
 		}
     	
 		this.setSpacing(10);
-		this.getChildren().addAll(title,hands,statsPane);
+		this.getChildren().addAll(title,hands,statsPane,rankings);
 		
 	}
 	
@@ -58,6 +60,7 @@ public class StatisticsView extends VBox{
 			percentages.get(i).setText(df.format(statistics.get(i))+" %");
 		}
 		hands.setText("Total Hands: "+stats.getTotal());
+		rankings.setText(stats.getRanking());
 	}
 	
 	public void resetLabels() {
