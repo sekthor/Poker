@@ -25,7 +25,6 @@ public class Winner {
     			winner = players.get(i);
     		} else if (winner.getHand().ordinal() == players.get(i).getHand().ordinal()) {
     			winner = tiebreak(winner, players.get(i));
-    			System.out.println("tiebreak, winner: "+ winner.getPlayerName() +"  "+ winner.getHand());
     		}
     	} 
     	return players.indexOf(winner);	
