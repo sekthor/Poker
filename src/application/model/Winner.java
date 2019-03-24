@@ -35,7 +35,7 @@ public class Winner {
 	
 	
 	
-	private static Player tiebreak(Player p1, Player p2) {
+	protected static Player tiebreak(Player p1, Player p2) {
 		
 		ArrayList<Card> hand1 = (ArrayList<Card>) p1.getCards().clone();
 		ArrayList<Card> hand2 = (ArrayList<Card>) p2.getCards().clone();
@@ -51,32 +51,14 @@ public class Winner {
 				
 				
 			case OnePair:
-				Card.Rank pair1Rank = Rank.Two;
-				Card.Rank pair2Rank = Rank.Two;
-				
-				boolean found = false;
-				for(int i = 0; i < hand1.size() && !found; i++) {
-					if (hand1.get(i).getRank() == hand1.get(i+1).getRank()) {
-						pair1Rank = hand1.get(i).getRank();
-						found = true;
-					}
-				}
-				found= false;
-				for(int i = 0; i < hand2.size() && !found; i++) {
-					if (hand2.get(i).getRank() == hand2.get(i+1).getRank()) {
-						pair2Rank = hand2.get(i).getRank();
-						found = true;
-					}
-				}
-				if (pair1Rank.ordinal() == pair2Rank.ordinal()) {
-					/* TODO: need to figure out how to check for suit*/ 
-					return p1;
-				} else if (pair1Rank.ordinal() > pair2Rank.ordinal()){
-					return p1;
+				int comp = getPairCard(hand1).compareTo(getPairCard(hand2));
+				if(comp == 0) {
+					player1wins = hasHighestCard(hand1,hand2);
+				} else if( comp > 0) {
+					player1wins = true;
 				} else {
-					return p2;
+					player1wins = false;
 				}
-				
 			
 			case TwoPair:
 				break;
@@ -153,6 +135,19 @@ public class Winner {
 			}
 		}
 		return false;
+	}
+	
+	
+	
+	protected static Card getPairCard(ArrayList<Card> hand) {
+		boolean found=false;
+		Card card = null;
+		for (int i=0; i<hand.size()-1 && !found; i++) {
+			if(hand.get(i).getRank().ordinal() == hand.get(i+1).getRank().ordinal()) {
+				card= hand.get(i);
+			}	
+		}
+		return card;
 	}
 	
 	private static boolean hasHighestTriplet(ArrayList<Card> hand1, ArrayList<Card> hand2) {
