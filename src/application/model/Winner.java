@@ -148,13 +148,24 @@ public class Winner {
 				
 				
 			case FullHouse:
+				/*
+				 * impossible, no need to implement
+				 * Since there's only one deck
+				 * */
 				break;
+				
+				
 			case FourOfAKind:
+				/*
+				 * impossible, no need to implement
+				 * Since there's only one deck
+				 * */
 				break;
 				
 			case StraightFlush:
 				player1wins = hasHighestCard(hand1, hand2);
 				break;
+				
 			case RoyalFlush:
 				break;
 		}
