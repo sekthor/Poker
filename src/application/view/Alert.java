@@ -27,13 +27,5 @@ public class Alert extends Stage{
 		this.setScene(root);
 		
 		this.getIcons().add(new Image("file:./src/images/alert.png"));
-		
-		
 	}
-	
-	
-	
-		
-	
-
 }

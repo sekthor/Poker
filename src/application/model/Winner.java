@@ -126,14 +126,14 @@ public class Winner {
 				if(hand1.get(2).getRank().ordinal() == hand2.get(2).getRank().ordinal()) {
 					// if they match we need to compare ordinal of Suits
 					if(hand1.get(2).getSuit().ordinal() > hand2.get(2).getSuit().ordinal()) {
-						return p1;
+						player1wins = true;
 					} else {
-						return p2;
+						player1wins = false;
 					}		
 				} else if(hand1.get(2).getRank().ordinal() > hand2.get(2).getRank().ordinal()){
-					return p1;
+					player1wins = true;
 				} else {
-					return p2;
+					player1wins = false;
 				}
 				
 				
@@ -149,26 +149,45 @@ public class Winner {
 				
 			case FullHouse:
 				/*
-				 * impossible, no need to implement
-				 * Since there's only one deck
-				 * */
+				 * sorted list, so: the middle card will always be part of the threeOfAKind
+				 * so we compare the two middle cards. Since there only a single deck, it is 
+				 * impossible for those cards to match.
+				 */
+				comp = hand1.get(2).compareTo(hand2.get(2));
+				if (comp > 0) {
+					player1wins = true;
+				} else {
+					player1wins = false;
+				}
 				break;
 				
 				
 			case FourOfAKind:
 				/*
-				 * impossible, no need to implement
-				 * Since there's only one deck
+				 * Cards 1-3 will always be part of the FourOfAKind. Odd one is either in position 
+				 * 0 or 4. So we can just compare Card no.2 of both decks.
+				 * With one deck it impossible for them to match. 
 				 * */
+				comp = hand1.get(2).compareTo(hand2.get(2));
+				if (comp > 0) {
+					player1wins = true;
+				} else {
+					player1wins = false;
+				}
 				break;
+				
 				
 			case StraightFlush:
 				player1wins = hasHighestCard(hand1, hand2);
 				break;
 				
+				
 			case RoyalFlush:
+				/*
+				 * No rule
+				 * */
 				break;
-		}
+			}
 		
 		
 		if (player1wins) {
@@ -206,10 +225,4 @@ public class Winner {
 		}
 		return card;
 	}
-	
-	
-	private static boolean hasHighestTriplet(ArrayList<Card> hand1, ArrayList<Card> hand2) {
-		return true;
-	}
-	
 }
