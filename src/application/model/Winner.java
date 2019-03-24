@@ -48,6 +48,7 @@ public class Winner {
 		
 			case HighCard:
 				player1wins = hasHighestCard(hand1, hand2);
+				break;
 				
 				
 			case OnePair:
@@ -59,10 +60,12 @@ public class Winner {
 				} else {
 					player1wins = false;
 				}
+				break;
 			
 			case TwoPair:
-				break;
 				
+				
+				break;
 				
 			case ThreeOfAKind:
 				/*
@@ -142,13 +145,17 @@ public class Winner {
 	protected static Card getPairCard(ArrayList<Card> hand) {
 		boolean found=false;
 		Card card = null;
-		for (int i=0; i<hand.size()-1 && !found; i++) {
-			if(hand.get(i).getRank().ordinal() == hand.get(i+1).getRank().ordinal()) {
-				card= hand.get(i);
+		for (int i= hand.size()-1; i>0 && !found; i--) {
+			if(hand.get(i).getRank().ordinal() == hand.get(i-1).getRank().ordinal()) {
+				System.out.println(i);
+				card = hand.get(i);
+				found = true;
 			}	
 		}
 		return card;
 	}
+	
+	
 	
 	private static boolean hasHighestTriplet(ArrayList<Card> hand1, ArrayList<Card> hand2) {
 		return true;
