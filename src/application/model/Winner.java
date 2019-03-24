@@ -151,7 +151,9 @@ public class Winner {
 				break;
 			case FourOfAKind:
 				break;
+				
 			case StraightFlush:
+				player1wins = hasHighestCard(hand1, hand2);
 				break;
 			case RoyalFlush:
 				break;
