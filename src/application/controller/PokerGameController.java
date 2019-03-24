@@ -10,8 +10,11 @@ import application.model.PokerGameModel;
 import application.model.Statistics;
 import application.model.Winner;
 import application.view.Alert;
+import application.view.NameChanger;
 import application.view.PlayerPane;
 import application.view.PokerGameView;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 
 public class PokerGameController {
@@ -20,6 +23,7 @@ public class PokerGameController {
 	private PokerGame pokerGame;
 	private boolean shuffleMode = false;
 	private boolean frame = false;
+	private NameChanger changer;
 	
 	public PokerGameController(PokerGameModel model, PokerGameView view, PokerGame pokerGame) {
 		this.model = model;
@@ -33,6 +37,7 @@ public class PokerGameController {
 		view.getResetStatsButton().setOnAction(e -> resetStats());
 		view.getAutoShuffleButton().setOnAction(e -> changeAutoShuffleMode());
 		view.getWinnerFrameButton().setOnAction(e -> changeWinnerFrameMode());
+		view.getChangeNamesButton().setOnAction(e -> changNameWindow());
 		
 		
 	}
@@ -155,5 +160,22 @@ public class PokerGameController {
     	} else {
     		view.setWinnerFrameText("Enable Winner-Frame");
     	}
+    }
+    
+    private void changNameWindow() {
+    	changer = new NameChanger(model.getPlayers());
+    	changer.show();
+    	changer.getSubmitButton().setOnAction(e -> changeNames(changer.getFields(), changer));
+    	
+    }
+    
+    private void changeNames(ArrayList<TextField> players, NameChanger changer) {
+    	for(TextField f : players) {
+    		model.getPlayers().get(players.indexOf(f)).setName(f.getText());
+    	}
+    	for (int i = 0; i<model.getPlayers().size(); i++) {
+    		view.getPlayerPane(i).updatePlayerDisplay();
+    	}
+    	changer.hide();
     }
 }

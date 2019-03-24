@@ -23,6 +23,7 @@ public class PokerGameView {
 	private PokerGameModel model;
 	private MenuItem addPlayer;
 	private MenuItem rmvPlayer;
+	private MenuItem changeNames;
 	private MenuItem resetStats;
 	private MenuItem autoShuffle;
 	private MenuItem frameWinner;
@@ -58,7 +59,8 @@ public class PokerGameView {
 		Menu playerMenu = new Menu("Players");
 		addPlayer = new MenuItem("Add Player");
 		rmvPlayer = new MenuItem("Remove Player");
-		playerMenu.getItems().addAll(addPlayer, rmvPlayer);
+		changeNames = new MenuItem("Change Names");
+		playerMenu.getItems().addAll(addPlayer, rmvPlayer, changeNames);
 		
 		Menu statistics = new Menu("Statistics");
 		resetStats = new MenuItem("Reset");
@@ -117,6 +119,9 @@ public class PokerGameView {
 	}
 	public MenuItem getRemoveButton() {
 		return this.rmvPlayer;
+	}
+	public MenuItem getChangeNamesButton() {
+		return this.changeNames;
 	}
 	public MenuItem getAutoShuffleButton() {
 		return this.autoShuffle;
