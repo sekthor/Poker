@@ -74,7 +74,9 @@ public class PokerGameController {
         		PlayerPane pp = view.getPlayerPane(i);
         		pp.updatePlayerDisplay();
         	}
-        	
+        	/*
+        	 * Here we determine the winner
+        	 */
         	ArrayList<Player> players = new ArrayList<Player>();
         	for (int i = 0; i < PokerGame.NUM_PLAYERS; i++) {
         		players.add(model.getPlayer(i)) ;   		    		
@@ -89,14 +91,8 @@ public class PokerGameController {
     		} else {
     			Alert alert = new Alert("Not enough cards - shuffle first");
     			alert.show();
-    		}
-            
-    	}
-    	
-    	/*
-    	 * Here we determine the Winner
-    	 */
-    	
+    		}  
+    	}	
     }
     
      
@@ -110,6 +106,9 @@ public class PokerGameController {
     	 */
     	
     	if(PokerGame.NUM_PLAYERS<6) {
+    		if(PokerGame.NUM_PLAYERS>=3) {
+    			view.setMaximize();
+    		}
     		pokerGame.addPlayer();
     		model.addPlayer();
     		view.addPlayer();
@@ -117,7 +116,6 @@ public class PokerGameController {
     		Alert alert = new Alert("Six is the maximum ammount of players!");
     		alert.showAndWait();
     	}
-    	
     }
     
     private void rmvPlayer() {
@@ -129,7 +127,6 @@ public class PokerGameController {
     		Alert alert = new Alert("Two is the minimum ammount of players!");
     		alert.showAndWait();
     	}
-    	
     }
     
     private void resetStats() {

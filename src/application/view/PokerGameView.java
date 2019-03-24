@@ -16,7 +16,7 @@ import application.model.PokerGameModel;
 
 public class PokerGameView {
 	private GridPane players;
-	//private HBox players;
+	private Stage stage;
 	private ControlArea controls;
 	private MenuBar menu;
 	
@@ -29,7 +29,7 @@ public class PokerGameView {
 	
 	public PokerGameView(Stage stage, PokerGameModel model) {
 		this.model = model;
-		
+		this.stage = stage;
 		// Create all of the player panes we need, and put them into an HBox
 		players = new GridPane();
 		//players = new HBox();
@@ -39,6 +39,7 @@ public class PokerGameView {
 			for (int j = 0; j<3 && count<PokerGame.NUM_PLAYERS; j++) {
 				PlayerPane pp = new PlayerPane();
 				pp.setPlayer(model.getPlayer(count));
+				pp.setMaxHeight(Double.MAX_VALUE);
 				players.add(pp, j, i);
 				count++;
 			}
@@ -123,6 +124,9 @@ public class PokerGameView {
 	}
 	public StatisticsView getStatsView() {
 		return this.stats;
+	}
+	public void setMaximize() {
+		stage.setMaximized(true);
 	}
 	
 	public void addPlayer() {
