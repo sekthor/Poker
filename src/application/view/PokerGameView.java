@@ -138,6 +138,9 @@ public class PokerGameView {
 	public StatisticsView getStatsView() {
 		return this.stats;
 	}
+	public Stage getStage() {
+		return this.stage;
+	}
 	public void setMaximize() {
 		stage.setMaximized(true);
 	}

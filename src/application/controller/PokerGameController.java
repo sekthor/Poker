@@ -101,7 +101,8 @@ public class PokerGameController {
     			deal();
     		} else {
     			Alert alert = new Alert("Not enough cards - shuffle first\n\nTip: Enable Auto-Shuffle");
-    			alert.show();
+    			alert.initOwner(view.getStage());
+    			alert.showAndWait();
     		}  
     	}	
     }
@@ -125,6 +126,7 @@ public class PokerGameController {
     		view.addPlayer();
     	} else {
     		Alert alert = new Alert("Six is the maximum ammount of players!");
+    		alert.initOwner(view.getStage());
     		alert.showAndWait();
     	}
     }
@@ -136,6 +138,7 @@ public class PokerGameController {
     		view.rmvPlayer(pokerGame.NUM_PLAYERS);
     	} else {
     		Alert alert = new Alert("Two is the minimum ammount of players!");
+    		alert.initOwner(view.getStage());
     		alert.showAndWait();
     	}
     }
