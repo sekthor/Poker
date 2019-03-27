@@ -20,7 +20,7 @@ public class StatisticsView extends VBox{
 	private ArrayList<Label> percentages;
 	
 	public StatisticsView() {
-		this.setId("stats");
+		this.setId("statsview");
 		
 		title = new Label("Statistics");
 		

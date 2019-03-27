@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
@@ -96,6 +96,7 @@ public class PokerGameView {
         scene.getStylesheets().add(
                 getClass().getResource("poker.css").toExternalForm());
         stage.setTitle("Poker Miniproject");
+        stage.getIcons().add(new Image("file:./src/images/chip.png"));
         stage.setScene(scene);
         stage.show();		
 	}
