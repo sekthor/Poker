@@ -90,6 +90,7 @@ public class PokerGameController {
         	int winner = Winner.evaluateWinner(model.getPlayers());
         	model.getPlayer(winner).addWin();
         	view.getPlayerPane(winner).updatePlayerDisplay();
+        	view.getPlayerPane(winner).winnerAnimation();
         	if (frame) {
         		view.getPlayerPane(winner).setStyle("-fx-padding: 11px; -fx-border-color: #5f1919; -fx-border-width: 10px;");
         	}

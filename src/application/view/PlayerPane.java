@@ -3,10 +3,12 @@ package application.view;
 import application.model.Card;
 import application.model.HandType;
 import application.model.Player;
+import javafx.animation.ScaleTransition;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 
 public class PlayerPane extends VBox {
@@ -14,6 +16,8 @@ public class PlayerPane extends VBox {
     private HBox hboxCards = new HBox();
     private Label lblEvaluation = new Label("--");
     private Label winner = new Label("--");
+    private ScaleTransition st = new ScaleTransition(Duration.millis(400), winner);
+    
     
     // Link to player object
     private Player player;
@@ -32,6 +36,13 @@ public class PlayerPane extends VBox {
             Label lblCard = new CardLabel();
             hboxCards.getChildren().add(lblCard);
         }
+        
+        
+        // Animation for winner 
+        st.setByX(1.1);
+        st.setByY(1.1);
+        st.setCycleCount(2);
+        st.setAutoReverse(true); 
     }
     
     
@@ -40,6 +51,9 @@ public class PlayerPane extends VBox {
     	updatePlayerDisplay(); // Immediately display the player information
     }
     
+    public void winnerAnimation() {
+    	st.play();
+    }
     
     public void updatePlayerDisplay() {
     	lblName.setText(player.getPlayerName());
