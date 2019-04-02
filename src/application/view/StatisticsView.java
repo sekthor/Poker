@@ -28,7 +28,7 @@ public class StatisticsView extends VBox{
 		percentages = new ArrayList<Label>();
 		statsPane = new GridPane();
 		statsPane.getStyleClass().add("stats");
-		rankings = new Label("Rankings:\n1:\n2:\n");
+		rankings = new Label("Rankings:\n1: - \n2: - \n");
 		
 		for (HandType hand : HandType.values()) {
 			Label label = new Label(hand.toString());

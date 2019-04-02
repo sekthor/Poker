@@ -15,8 +15,12 @@ public class NameChanger extends Stage{
 	private VBox changer;
 	
 	public NameChanger(ArrayList<Player> players) {
+		
 		playerFields = new ArrayList<TextField>();
 		changer = new VBox();
+		changer.setSpacing(10);
+		changer.setId("changer");
+		
 		for (Player p : players) {
 			TextField name = new TextField();
 			name.setText(p.getPlayerName());
@@ -26,6 +30,7 @@ public class NameChanger extends Stage{
 		submit = new Button("submit");
 		changer.getChildren().add(submit);
 		Scene scene = new Scene(changer);
+		scene.getStylesheets().add(getClass().getResource("namechanger.css").toExternalForm());
 		this.setScene(scene);
 	}
 	

@@ -1,11 +1,12 @@
 package application.model;
 
-import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.*;
 
 public class HandTypeTest {
 	// We define the hands using abbreviations. The code at the bottom

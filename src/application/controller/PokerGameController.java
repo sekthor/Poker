@@ -23,6 +23,7 @@ public class PokerGameController {
 	private PokerGame pokerGame;
 	private boolean shuffleMode = false;
 	private boolean frame = false;
+	private boolean fullScreen = false;
 	private NameChanger changer;
 	
 	public PokerGameController(PokerGameModel model, PokerGameView view, PokerGame pokerGame) {
@@ -37,9 +38,8 @@ public class PokerGameController {
 		view.getResetStatsButton().setOnAction(e -> resetStats());
 		view.getAutoShuffleButton().setOnAction(e -> changeAutoShuffleMode());
 		view.getWinnerFrameButton().setOnAction(e -> changeWinnerFrameMode());
-		view.getChangeNamesButton().setOnAction(e -> changNameWindow());
-		
-		
+		view.getChangeNamesButton().setOnAction(e -> changeNameWindow());
+		view.getFullScreenButton().setOnAction(e -> setFullScreen());		
 	}
 	
 
@@ -165,7 +165,7 @@ public class PokerGameController {
     	}
     }
     
-    private void changNameWindow() {
+    private void changeNameWindow() {
     	changer = new NameChanger(model.getPlayers());
     	changer.show();
     	changer.getSubmitButton().setOnAction(e -> changeNames(changer.getFields(), changer));
@@ -180,5 +180,15 @@ public class PokerGameController {
     		view.getPlayerPane(i).updatePlayerDisplay();
     	}
     	changer.hide();
+    }
+    
+    private void setFullScreen() {
+    	fullScreen = !fullScreen;
+    	view.setFullScreen(fullScreen);
+    	if (fullScreen) {
+    		view.setFullScreenText("Full Screen OFF");
+    	} else {
+    		view.setFullScreenText("Full Screen ON");
+    	}
     }
 }

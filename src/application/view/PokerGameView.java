@@ -27,6 +27,7 @@ public class PokerGameView {
 	private MenuItem resetStats;
 	private MenuItem autoShuffle;
 	private MenuItem frameWinner;
+	private MenuItem fullScreen;
 	private StatisticsView stats;
 	
 	public PokerGameView(Stage stage, PokerGameModel model) {
@@ -56,26 +57,29 @@ public class PokerGameView {
 		// menu
 		menu = new MenuBar();
 		
+		// Player - Menu
 		Menu playerMenu = new Menu("Players");
 		addPlayer = new MenuItem("Add Player");
 		rmvPlayer = new MenuItem("Remove Player");
 		changeNames = new MenuItem("Change Names");
 		playerMenu.getItems().addAll(addPlayer, rmvPlayer, changeNames);
 		
+		// Statistics - Menu
 		Menu statistics = new Menu("Statistics");
 		resetStats = new MenuItem("Reset");
 		statistics.getItems().add(resetStats);
 		
+		// Settings - Menu
 		Menu settings = new Menu("Settings");
 		autoShuffle = new MenuItem("Enable Auto-Shuffle");
 		frameWinner = new MenuItem("Enable Winner-Frame");
-		settings.getItems().addAll(autoShuffle, frameWinner);
-		
-		
+		fullScreen = new MenuItem("Full Screen ON");
+		settings.getItems().addAll(autoShuffle, frameWinner, fullScreen);
 		
 		menu.getMenus().addAll(playerMenu, statistics, settings);
 		
 		
+		// Statistics
 		stats = new StatisticsView();
 		stats.setStats(model.getStats());
 		stats.getStyleClass().add("stats");
@@ -89,7 +93,7 @@ public class PokerGameView {
 		root.setId("root");
 		
 		// Disallow resizing - which is difficult to get right with images
-		//stage.setResizable(true);
+		// stage.setResizable(false);
 
         // Create the scene using our layout; then display it
         Scene scene = new Scene(root);
@@ -101,14 +105,18 @@ public class PokerGameView {
         stage.show();		
 	}
 	
+	
 	public PlayerPane getPlayerPane(int i) {
 		return (PlayerPane) players.getChildren().get(i);
 	}
 	
+	
+	/*
+	 * getters and setters for Event Handling of Buttons and Menu Items
+	 * */
 	public Button getShuffleButton() {
 		return controls.btnShuffle;
 	}
-	
 	public Button getDealButton() {
 		return controls.btnDeal;
 	}
@@ -136,6 +144,12 @@ public class PokerGameView {
 	public void setWinnerFrameText(String string) {
 		this.frameWinner.setText(string);
 	}
+	public MenuItem getFullScreenButton() {
+		return this.fullScreen;
+	}
+	public void setFullScreenText(String string) {
+		this.fullScreen.setText(string);
+	}
 	public StatisticsView getStatsView() {
 		return this.stats;
 	}
@@ -145,6 +159,11 @@ public class PokerGameView {
 	public void setMaximize() {
 		stage.setMaximized(true);
 	}
+	public void setFullScreen(boolean mode) {
+		stage.setFullScreen(mode);
+	}
+	
+	
 	
 	public void addPlayer() {
 		PlayerPane pp = new PlayerPane();
