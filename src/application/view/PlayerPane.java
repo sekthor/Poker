@@ -16,7 +16,7 @@ public class PlayerPane extends VBox {
     private HBox hboxCards = new HBox();
     private Label lblEvaluation = new Label("--");
     private Label winner = new Label("--");
-    private ScaleTransition st = new ScaleTransition(Duration.millis(400), winner);
+    private ScaleTransition winnerAnimation = new ScaleTransition(Duration.millis(400), winner);
     
     
     // Link to player object
@@ -36,15 +36,13 @@ public class PlayerPane extends VBox {
             Label lblCard = new CardLabel();
             hboxCards.getChildren().add(lblCard);
         }
-        
-        
+
         // Animation for winner 
-        st.setByX(1.1);
-        st.setByY(1.1);
-        st.setCycleCount(2);
-        st.setAutoReverse(true); 
+        winnerAnimation.setByX(1.1);
+        winnerAnimation.setByY(1.1);
+        winnerAnimation.setCycleCount(2);
+        winnerAnimation.setAutoReverse(true); 
     }
-    
     
     public void setPlayer(Player player) {
     	this.player = player;
@@ -52,7 +50,7 @@ public class PlayerPane extends VBox {
     }
     
     public void winnerAnimation() {
-    	st.play();
+    	winnerAnimation.play();
     }
     
     public void updatePlayerDisplay() {
