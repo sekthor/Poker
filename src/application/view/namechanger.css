@@ -1,0 +1,9 @@
+#changer{
+	-fx-background-color: black;
+	-fx-padding: 20;
+}
+
+.TextField{
+	-fx-background-color: gray;
+}
+
