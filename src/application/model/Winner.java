@@ -164,7 +164,7 @@ public class Winner {
 				
 			case FourOfAKind:
 				/*
-				 * Cards 1-3 will always be part of the FourOfAKind. Odd one is either in position 
+				 * Cards 1-3 will always be part of the FourOfAKind. The odd-one.out is either in position 
 				 * 0 or 4. So we can just compare Card no.2 of both decks.
 				 * With one deck it impossible for them to match. 
 				 * */
@@ -215,6 +215,12 @@ public class Winner {
 	
 	
 	protected static Card getPairCard(ArrayList<Card> hand) {
+		/*
+		 * Returns a Card from the pair
+		 * for loop starts at the end and decreases count.
+		 * this way the method can be used for TwoPair as well
+		 * since the higher pair will be found first and can be compared.
+		 * */
 		boolean found=false;
 		Card card = null;
 		for (int i= hand.size()-1; i>0 && !found; i--) {
