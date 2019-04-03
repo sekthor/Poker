@@ -3,6 +3,7 @@ package application.view;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class NameChanger extends Stage{
 		changer.getChildren().add(submit);
 		Scene scene = new Scene(changer);
 		scene.getStylesheets().add(getClass().getResource("namechanger.css").toExternalForm());
+		this.getIcons().add(new Image("file:./src/images/chip.png"));
 		this.setScene(scene);
 	}
 	
