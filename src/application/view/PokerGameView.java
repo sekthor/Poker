@@ -25,6 +25,7 @@ public class PokerGameView {
 	private MenuItem rmvPlayer;
 	private MenuItem changeNames;
 	private MenuItem resetStats;
+	private MenuItem resetWins;
 	private MenuItem autoShuffle;
 	private MenuItem frameWinner;
 	private MenuItem fullScreen;
@@ -67,8 +68,9 @@ public class PokerGameView {
 		
 		// Statistics - Menu
 		Menu statistics = new Menu("Statistics");
-		resetStats = new MenuItem("Reset");
-		statistics.getItems().add(resetStats);
+		resetStats = new MenuItem("Reset Statistics");
+		resetWins = new MenuItem("Reset Wins");
+		statistics.getItems().addAll(resetStats, resetWins);
 		
 		// Settings - Menu
 		Menu settings = new Menu("Settings");
@@ -126,6 +128,9 @@ public class PokerGameView {
 	}
 	public MenuItem getResetStatsButton() {
 		return this.resetStats;
+	}
+	public MenuItem getResetWinsButton() {
+		return this.resetWins;
 	}
 	public MenuItem getRemoveButton() {
 		return this.rmvPlayer;

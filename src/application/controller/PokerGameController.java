@@ -1,7 +1,6 @@
 package application.controller;
 
 import java.util.ArrayList;
-
 import application.PokerGame;
 import application.model.Card;
 import application.model.DeckOfCards;
@@ -13,20 +12,19 @@ import application.view.Alert;
 import application.view.NameChanger;
 import application.view.PlayerPane;
 import application.view.PokerGameView;
-import javafx.event.Event;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 
 public class PokerGameController {
+	
 	private PokerGameModel model;
 	private PokerGameView view;
 	private PokerGame pokerGame;
-	private boolean shuffleMode = false;
-	private boolean frame = false;
-	private boolean fullScreen = false;
+	private boolean shuffleMode = false; // Autoshuffling ON/OFF
+	private boolean frame = false;  // Winner-frame ON/OFF
+	private boolean fullScreen = false; // Fullscreen ON/OFF
 	private NameChanger changer;
 	
 	public PokerGameController(PokerGameModel model, PokerGameView view, PokerGame pokerGame) {
@@ -39,6 +37,7 @@ public class PokerGameController {
 		view.getAddButton().setOnAction(e -> addPlayer());
 		view.getRemoveButton().setOnAction(e -> rmvPlayer());
 		view.getResetStatsButton().setOnAction(e -> resetStats());
+		view.getResetWinsButton().setOnAction(e -> resetWins());
 		view.getAutoShuffleButton().setOnAction(e -> changeAutoShuffleMode());
 		view.getWinnerFrameButton().setOnAction(e -> changeWinnerFrameMode());
 		view.getChangeNamesButton().setOnAction(e -> changeNameWindow());
@@ -89,8 +88,6 @@ public class PokerGameController {
         	/*
         	 * Here we determine the winner
         	 */
-        	
-        	
         	int winner = Winner.evaluateWinner(model.getPlayers());
         	model.getPlayer(winner).addWin();
         	view.getPlayerPane(winner).updatePlayerDisplay();
@@ -101,6 +98,7 @@ public class PokerGameController {
         	view.getStatsView().updateStats();
         	
     	} else {
+    		// If autoshuffle-mode is enabled it will automatically shuffle and then deal
     		if (shuffleMode) {
     			shuffle();
     			deal();
@@ -153,6 +151,16 @@ public class PokerGameController {
     	view.getStatsView().resetLabels();
     }
     
+    private void resetWins() {
+    	for (Player p : model.getPlayers()) {
+    		p.wins = 0;
+    	}
+    	for (int i=0; i<PokerGame.NUM_PLAYERS;i++) {
+    		view.getPlayerPane(i).updatePlayerDisplay();
+    	}
+    	
+    }
+    
     private void changeAutoShuffleMode() {
     	this.shuffleMode = !this.shuffleMode;
     	if(shuffleMode) {
@@ -161,6 +169,10 @@ public class PokerGameController {
     		view.setAutoShuffleText("Enable Auto-Shuffle");
     	}
     }
+    
+    /*
+     * Will change WinnerFrame-mode and adjust Button Text
+     * */
     private void changeWinnerFrameMode() {
     	this.frame = !this.frame;
     	if(frame) {
@@ -170,13 +182,18 @@ public class PokerGameController {
     	}
     }
     
+    /*
+     * Will make new window to change names
+     * */
     private void changeNameWindow() {
     	changer = new NameChanger(model.getPlayers());
     	changer.show();
     	changer.getSubmitButton().setOnAction(e -> changeNames(changer.getFields(), changer));
-    	
     }
     
+    /*
+     * Will get Names from Namechanger and change NAme of every Player
+     * */
     private void changeNames(ArrayList<TextField> players, NameChanger changer) {
     	for(TextField f : players) {
     		model.getPlayers().get(players.indexOf(f)).setName(f.getText());
@@ -187,6 +204,9 @@ public class PokerGameController {
     	changer.hide();
     }
     
+    /*
+     * Will change FullScreen-mode.
+     * */
     private void setFullScreen() {
     	fullScreen = !fullScreen;
     	view.setFullScreen(fullScreen);
@@ -197,6 +217,12 @@ public class PokerGameController {
     	}
     }
     
+    
+    /*
+     * Fullscreen mode can be terminated with Esc-Key
+     * This method prevents this from interfering with my custom 
+     * setFullScreen() method 
+     * */
     public void parseKey(KeyEvent e) {
 		if (e.getCode() == KeyCode.ESCAPE && fullScreen) {
 			setFullScreen();
