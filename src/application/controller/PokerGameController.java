@@ -13,8 +13,11 @@ import application.view.Alert;
 import application.view.NameChanger;
 import application.view.PlayerPane;
 import application.view.PokerGameView;
+import javafx.event.Event;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 
 public class PokerGameController {
@@ -40,6 +43,7 @@ public class PokerGameController {
 		view.getWinnerFrameButton().setOnAction(e -> changeWinnerFrameMode());
 		view.getChangeNamesButton().setOnAction(e -> changeNameWindow());
 		view.getFullScreenButton().setOnAction(e -> setFullScreen());		
+		view.getScene().setOnKeyReleased(e -> parseKey(e));
 	}
 	
 
@@ -192,4 +196,10 @@ public class PokerGameController {
     		view.setFullScreenText("Full Screen ON");
     	}
     }
+    
+    public void parseKey(KeyEvent e) {
+		if (e.getCode() == KeyCode.ESCAPE && fullScreen) {
+			setFullScreen();
+		}
+	}
 }

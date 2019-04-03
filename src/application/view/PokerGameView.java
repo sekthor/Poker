@@ -29,6 +29,7 @@ public class PokerGameView {
 	private MenuItem frameWinner;
 	private MenuItem fullScreen;
 	private StatisticsView stats;
+	public Scene scene;
 	
 	public PokerGameView(Stage stage, PokerGameModel model) {
 		this.model = model;
@@ -96,7 +97,7 @@ public class PokerGameView {
 		// stage.setResizable(false);
 
         // Create the scene using our layout; then display it
-        Scene scene = new Scene(root);
+        scene = new Scene(root);
         scene.getStylesheets().add(
                 getClass().getResource("poker.css").toExternalForm());
         stage.setTitle("Poker Miniproject");
@@ -161,6 +162,10 @@ public class PokerGameView {
 	}
 	public void setFullScreen(boolean mode) {
 		stage.setFullScreen(mode);
+	}
+	
+	public Scene getScene() {
+		return this.scene;
 	}
 	
 	
