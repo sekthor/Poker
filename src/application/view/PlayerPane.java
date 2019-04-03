@@ -16,7 +16,7 @@ public class PlayerPane extends VBox {
     private HBox hboxCards = new HBox();
     private Label lblEvaluation = new Label("--");
     private Label winner = new Label("--");
-    private ScaleTransition winnerAnimation = new ScaleTransition(Duration.millis(400), winner);
+    private ScaleTransition winnerAnimation = new ScaleTransition(Duration.millis(400), lblEvaluation);
     
     
     // Link to player object
