@@ -27,10 +27,9 @@ public class PokerGameController {
 	private boolean fullScreen = false; // Fullscreen ON/OFF
 	private NameChanger changer;
 	
-	public PokerGameController(PokerGameModel model, PokerGameView view, PokerGame pokerGame) {
+	public PokerGameController(PokerGameModel model, PokerGameView view) {
 		this.model = model;
 		this.view = view;
-		this.pokerGame = pokerGame;
 		
 		view.getShuffleButton().setOnAction( e -> shuffle() );
 		view.getDealButton().setOnAction( e -> deal() );
@@ -124,7 +123,7 @@ public class PokerGameController {
     		if(PokerGame.NUM_PLAYERS>=2) {
     			view.setMaximize();
     		}
-    		pokerGame.addPlayer();
+    		PokerGame.NUM_PLAYERS += 1;
     		model.addPlayer();
     		view.addPlayer();
     	} else {
@@ -136,7 +135,7 @@ public class PokerGameController {
     
     private void rmvPlayer() {
     	if (PokerGame.NUM_PLAYERS > 2) {
-    		pokerGame.rmvPlayer();
+    		PokerGame.NUM_PLAYERS -= 1;
     		model.rmvPlayer();
     		view.rmvPlayer(pokerGame.NUM_PLAYERS);
     	} else {

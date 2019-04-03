@@ -21,7 +21,7 @@ public class PokerGame extends Application {
     	// Create and initialize the MVC components
     	model = new PokerGameModel();
     	view = new PokerGameView(primaryStage, model);
-    	controller = new PokerGameController(model, view, this);
+    	controller = new PokerGameController(model, view);
     }
     
     public void addPlayer() {
