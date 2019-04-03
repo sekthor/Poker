@@ -23,12 +23,4 @@ public class PokerGame extends Application {
     	view = new PokerGameView(primaryStage, model);
     	controller = new PokerGameController(model, view);
     }
-    
-    public void addPlayer() {
-    	NUM_PLAYERS += 1;
-    }
-    
-    public void rmvPlayer() {
-    	NUM_PLAYERS -= 1;
-    }
 }
