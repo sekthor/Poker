@@ -12,6 +12,7 @@ import application.view.Alert;
 import application.view.NameChanger;
 import application.view.PlayerPane;
 import application.view.PokerGameView;
+import application.view.Tutorial;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -40,7 +41,8 @@ public class PokerGameController {
 		view.getAutoShuffleButton().setOnAction(e -> changeAutoShuffleMode());
 		view.getWinnerFrameButton().setOnAction(e -> changeWinnerFrameMode());
 		view.getChangeNamesButton().setOnAction(e -> changeNameWindow());
-		view.getFullScreenButton().setOnAction(e -> setFullScreen());		
+		view.getFullScreenButton().setOnAction(e -> setFullScreen());
+		view.getTutorial().setOnAction(e -> tutorial());
 		view.getScene().setOnKeyReleased(e -> parseKey(e));
 	}
 	
@@ -216,6 +218,11 @@ public class PokerGameController {
     	}
     }
     
+    public void tutorial() {
+    	Tutorial t = new Tutorial();
+    	t.show();
+    }
+    
     
     /*
      * Fullscreen mode can be terminated with Esc-Key
@@ -225,6 +232,20 @@ public class PokerGameController {
     public void parseKey(KeyEvent e) {
 		if (e.getCode() == KeyCode.ESCAPE && fullScreen) {
 			setFullScreen();
-		}
+		} else if (e.getCode() == KeyCode.D) {
+			deal();
+		} else if (e.getCode() == KeyCode.S) {
+			shuffle();
+		} else if (e.getCode() == KeyCode.A) {
+			addPlayer();
+		} else if (e.getCode() == KeyCode.R) {
+			rmvPlayer();
+		} else if (e.getCode() == KeyCode.F) {
+			changeWinnerFrameMode();
+		} else if (e.getCode() == KeyCode.E) {
+			changeAutoShuffleMode();
+		} else if (e.getCode() == KeyCode.W) {
+			changeNameWindow();
+		} 
 	}
 }

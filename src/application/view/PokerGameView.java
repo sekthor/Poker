@@ -29,6 +29,7 @@ public class PokerGameView {
 	private MenuItem autoShuffle;
 	private MenuItem frameWinner;
 	private MenuItem fullScreen;
+	private MenuItem tutorialItem;
 	private StatisticsView stats;
 	public Scene scene;
 	
@@ -79,7 +80,11 @@ public class PokerGameView {
 		fullScreen = new MenuItem("Full Screen ON");
 		settings.getItems().addAll(autoShuffle, frameWinner, fullScreen);
 		
-		menu.getMenus().addAll(playerMenu, statistics, settings);
+		Menu tutorial = new Menu("Tutorial");
+		tutorialItem = new MenuItem("Tutorial");
+		tutorial.getItems().add(tutorialItem);
+		
+		menu.getMenus().addAll(playerMenu, statistics, settings, tutorial);
 		
 		
 		// Statistics
@@ -167,6 +172,9 @@ public class PokerGameView {
 	}
 	public void setFullScreen(boolean mode) {
 		stage.setFullScreen(mode);
+	}
+	public MenuItem getTutorial() {
+		return this.tutorialItem;
 	}
 	
 	public Scene getScene() {
