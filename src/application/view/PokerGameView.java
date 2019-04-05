@@ -80,7 +80,7 @@ public class PokerGameView {
 		fullScreen = new MenuItem("Full Screen ON");
 		settings.getItems().addAll(autoShuffle, frameWinner, fullScreen);
 		
-		Menu tutorial = new Menu("Tutorial");
+		Menu tutorial = new Menu("Help");
 		tutorialItem = new MenuItem("Tutorial");
 		tutorial.getItems().add(tutorialItem);
 		

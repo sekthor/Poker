@@ -41,7 +41,7 @@ public class PokerGameController {
 		view.getAutoShuffleButton().setOnAction(e -> changeAutoShuffleMode());
 		view.getWinnerFrameButton().setOnAction(e -> changeWinnerFrameMode());
 		view.getChangeNamesButton().setOnAction(e -> changeNameWindow());
-		view.getFullScreenButton().setOnAction(e -> setFullScreen());
+		view.getFullScreenButton().setOnAction(e -> changeFullScreenMode());
 		view.getTutorial().setOnAction(e -> tutorial());
 		view.getScene().setOnKeyReleased(e -> parseKey(e));
 	}
@@ -208,7 +208,7 @@ public class PokerGameController {
     /*
      * Will change FullScreen-mode.
      * */
-    private void setFullScreen() {
+    private void changeFullScreenMode() {
     	fullScreen = !fullScreen;
     	view.setFullScreen(fullScreen);
     	if (fullScreen) {
@@ -227,11 +227,11 @@ public class PokerGameController {
     /*
      * Fullscreen mode can be terminated with Esc-Key
      * This method prevents this from interfering with my custom 
-     * setFullScreen() method 
+     * changeFullScreenMode() method 
      * */
     public void parseKey(KeyEvent e) {
 		if (e.getCode() == KeyCode.ESCAPE && fullScreen) {
-			setFullScreen();
+			changeFullScreenMode();
 		} else if (e.getCode() == KeyCode.D) {
 			deal();
 		} else if (e.getCode() == KeyCode.S) {
